@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->decimal('price',15,2); // lưu trư với giá tiền lên đến đơn vị tỉ đồng
             $table->integer('quanity');
-            $table->integer('quanity_sale');
+            $table->integer('price_sale');
             $table->timestamps();
             $table->mediumText('description');
             $table->integer('rating');

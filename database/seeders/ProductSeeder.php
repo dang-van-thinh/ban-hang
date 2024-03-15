@@ -23,7 +23,8 @@ class ProductSeeder extends Seeder
                     'quanity_sale'=>0,
                     'description'=>'Quần rất chất lượng',
                     'rating'=>0,
-                    'img'=>'...'
+                    'img'=>'...',
+                    'category_id'=>1
                 ]
             ,
             [
@@ -33,7 +34,8 @@ class ProductSeeder extends Seeder
                 'quanity_sale'=>0,
                 'description'=>'Áo rất chất lượng',
                 'rating'=>5,
-                'img'=>'...'
+                'img'=>'...',
+                'category_id'=>2
             ]
             ]
 );
