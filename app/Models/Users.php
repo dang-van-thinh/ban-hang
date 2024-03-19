@@ -27,10 +27,13 @@ class Users extends Model
         }
     }
 
-    public function getAllUser()
+    public function getAllUser($offset,$limit)
     {
-       return Users::with('role')->get();
+       return Users::offset($offset)->limit($limit)->with('role')->get();
        // lấy dữ liệu từ 2 bảng role và user 
+    }
+    public function countAllUsers(){
+        return Users::count();
     }
     public function role(){ 
         // tạo liên kết với bảng role để lấy ra tên role tương ứng

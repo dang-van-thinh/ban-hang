@@ -42,7 +42,7 @@
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-            <a href="{{route('admin.dashboard')}}" class="app-brand-link">
+            <a href="{{ route('admin.dashboard') }}" class="app-brand-link">
               <span class="app-brand-logo demo">
                 <img src="" alt="">
               </span>
@@ -59,7 +59,7 @@
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
             <li class="menu-item active">
-              <a href="{{route('admin.dashboard')}}" class="menu-link">
+              <a href="{{ route('admin.dashboard') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Quản lý</div>
               </a>
@@ -87,17 +87,17 @@
             </li>
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                <i class="fas fa-clipboard-list menu-icon"></i>
                 <div data-i18n="Account Settings">Danh mục sản phẩm</div>
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="{{route('admin.category.create')}}" class="menu-link">
+                  <a href="{{ route('admin.category.create') }}" class="menu-link">
                     <div data-i18n="Account">Thêm mới</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="{{route('admin.category.index')}}" class="menu-link">
+                  <a href="{{ route('admin.category.index') }}" class="menu-link">
                     <div data-i18n="Account">Danh sách</div>
                   </a>
                 </li>
@@ -106,17 +106,17 @@
             </li>
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                <i class="fas fa-box menu-icon"></i>
                 <div data-i18n="Account Settings">Sản phẩm</div>
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="{{route('admin.product.create')}}" class="menu-link">
+                  <a href="{{ route('admin.product.create') }}" class="menu-link">
                     <div data-i18n="Account">Thêm mới</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="{{route('admin.product.index')}}" class="menu-link">
+                  <a href="{{ route('admin.product.index') }}" class="menu-link">
                     <div data-i18n="Account">Danh sách</div>
                   </a>
                 </li>
@@ -125,24 +125,63 @@
             </li>
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                <i class="fas fa-users menu-icon"></i>
                 <div data-i18n="Account Settings">Người dùng</div>
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="{{route('admin.user.create')}}" class="menu-link">
+                  <a href="{{ route('admin.user.create') }}" class="menu-link">
                     <div data-i18n="Account">Thêm mới</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="{{route('admin.user.index')}}" class="menu-link">
+                  <a href="{{ route('admin.user.index') }}" class="menu-link">
                     <div data-i18n="Account">Danh sách</div>
                   </a>
                 </li>
                 {{-- // --}}
               </ul>
             </li>
-            {{-- // --}}
+            {{-- thuộc tính sản phẩm --}}
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="fas fa-tools menu-icon"></i>
+                <div data-i18n="Account Settings">Thuộc tính sản phẩm</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="{{route('admin.att.create')}}" class="menu-link">
+                    <div data-i18n="Account">Thêm mới</div>
+                  </a>
+                  <a href="{{ route('admin.att.index') }}" class="menu-link">
+                    <div data-i18n="Account">Danh sách</div>
+                  </a>
+                </li>
+                
+                {{-- // --}}
+              </ul>
+            </li>
+            {{-- //end thuộc tính --}}
+            {{-- hoa don --}}
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="fas fa-file-invoice-dollar menu-icon"></i>
+                <div data-i18n="Account Settings">Hóa đơn</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="" class="menu-link">
+                    <div data-i18n="Account">Thêm mới</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="" class="menu-link">
+                    <div data-i18n="Account">Danh sách</div>
+                  </a>
+                </li>
+                {{-- // --}}
+              </ul>
+            </li>
             
           </ul>
         </aside>
@@ -195,7 +234,7 @@
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      <img src="{{asset('img/avatars/1.png')}}" alt class="w-px-40 h-auto rounded-circle" />
+                      <img src="{{ asset('img/avatars/1.png') }}" alt class="w-px-40 h-auto rounded-circle" />
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
@@ -204,7 +243,7 @@
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
-                              <img src="{{asset('img/avatars/1.png')}}" alt class="w-px-40 h-auto rounded-circle" />
+                              <img src="{{ asset('img/avatars/1.png') }}" alt class="w-px-40 h-auto rounded-circle" />
                             </div>
                           </div>
                           <div class="flex-grow-1">
@@ -242,7 +281,7 @@
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="{{route('logout')}}">
+                      <a class="dropdown-item" href="{{ route('logout') }}">
                         <i class="bx bx-power-off me-2"></i>
                         <span class="align-middle">Log Out</span>
                       </a>

@@ -29,12 +29,12 @@ class LoginCotronller extends Controller
             'title'
         ]));
     }
-    public function signup(){
-        $title = 'Đăng ký';
-        return view('login.register',compact([
-            'title'
-        ]));
-    }
+    // public function signup(){
+    //     $title = 'Đăng ký';
+    //     return view('login.register',compact([
+    //         'title'
+    //     ]));
+    // }
     public function register(AuthRequest $request){
         $request->flash();
         $data= [
@@ -57,9 +57,9 @@ class LoginCotronller extends Controller
         if(Auth::attempt($cr)){
            $role = Auth::user()->role_id;
             if($this->users->hashRole($role)){
-                return redirect()->route('admin.dashboard')->with('success','Đặng nhập thành công !');
+                return redirect()->route('admin.dashboard')->with('success','Đănng nhập thành công !');
             }else{
-                return redirect()->route('home');
+                return redirect()->route('home')->with('success','Đăng nhập thành công');
             }
             
         }else{

@@ -1,5 +1,6 @@
 @extends('client.layout.main')
 @section('content')
+
     <div class="row">
         @foreach ($products as $item)
             <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-3">
@@ -15,6 +16,7 @@
                     </a>
                 </div>
             </div>
+            {{-- end product  --}}
         @endforeach
     </div>
 @endsection

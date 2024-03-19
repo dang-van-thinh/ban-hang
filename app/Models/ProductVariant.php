@@ -26,4 +26,25 @@ class ProductVariant extends Model
     public function color(){
         return $this->belongsTo(Color::class);
     }
+    public function findOneProductVariant($id_product,$id_color,$id_size){
+        return ProductVariant::where('product_id',$id_product)
+        ->where('color_id',$id_color)
+        ->where('size_id',$id_size)
+        ->first();
+    }
+    public function addProductVariant($data){
+        return ProductVariant::insert($data);
+    }
+    public function updateProductVariant($id,$color,$size,$data){
+        return ProductVariant::where('product_id',$id)
+        ->where('color_id',$color)
+        ->where('size_id',$size)
+        ->update($data);
+    }
+    public function delProductVariant($id_product){
+        return ProductVariant::where('product_id',$id_product)->delete();
+    }
+    public function getOneProductVariant($id_product){
+        return ProductVariant::where('product_id',$id_product)->get();
+    }
 }

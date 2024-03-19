@@ -21,6 +21,6 @@ class AdminMiddleware
         if(Users::hashRole($role)){
             return $next($request);
         }
-        return redirect()->route('client.home')->with('error','Bạn không có quyền vào trang admin');
+        return redirect()->route('home')->with('error','Bạn không có quyền vào trang admin');
     }
 }

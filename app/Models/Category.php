@@ -13,8 +13,12 @@ class Category extends Model
         'name',
         'type'
     ];
-    public function getAllCategory(){
-        return Category::all();
+    public function getAllCategory($offset=null,$limit=null){
+        if($offset != null && $limit != null){
+            return Category::offset($offset)->limit($limit)->get();
+        }else{
+            return Category::all();
+        }
     }
 
     public function getCategoryParent(){
@@ -22,6 +26,9 @@ class Category extends Model
     }
     public function getCategoryChill($id){
         return Category::where('type',$id)->get();
+    }
+    public function countAllCategory(){
+        return Category::count();
     }
     public function getCategoryEdit($id){
         return Category::where('type','=',0)->where('id','!=',$id)->get();

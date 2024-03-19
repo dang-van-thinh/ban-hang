@@ -17,11 +17,10 @@ class AuthenicateMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::id() !== null){
-           return $next($request);
+        if (Auth::id() !== null) { // check xem da dang nhap chua
+            return $next($request);
+        } else {
+            return redirect()->route('home')->with('error', 'Bạn phải thực hiện đăng nhập !');
         }
-    else{
-        return redirect()->route('home')->with('error','Bạn phải thực hiện đăng nhập !');
-    }
     }
 }

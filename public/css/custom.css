@@ -1,6 +1,14 @@
 *{
     margin: 0;
     box-sizing: border-box;
+    font-family: 'JetBrains Mono',Courier ;
+    font-size: 15px;
+}
+:root{
+    --background-white : #ffff;
+    --text-color : #000000aa;
+    --background-black : #000000;
+    --text-color : #ffffff;
 }
 a {
     text-decoration: none;
@@ -102,4 +110,13 @@ transform: translate(-175px,10px);
 }
 #form-register{
     display: none;
+}
+.show li{
+    width: 15rem;
+}
+.show li a:hover{
+    color: #14bbcd !important;
+}
+.me-n{
+    transform: translate(-50px,0);
 }

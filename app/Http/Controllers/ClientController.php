@@ -19,6 +19,8 @@ class ClientController extends Controller
     }
     //
     public function home(){
+        // dd(Auth::user());
+        // die;
         $title = 'Trang chủ';
         $checkLogin = Auth::check();
         $categoryChill = $this->category;

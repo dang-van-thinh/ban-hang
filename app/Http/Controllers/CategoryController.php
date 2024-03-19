@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use App\Models\Product;
+use App\Reponsitories\ProductReponsitory;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -13,20 +14,35 @@ class CategoryController extends Controller
     //
     protected $category;
     protected $product;
-    public function __construct()
+    protected $productReponsitory;
+    public function __construct(ProductReponsitory $productReponsitory)
     {
         $this->category = new Category();
         $this->product =  new Product();
+        $this->productReponsitory = $productReponsitory;
     }
-    public function index()
+    public function index($page=0)
     {
         $title = 'Danh sách danh mục sản phẩm';
-        $category = $this->category->getAllCategory();
-        $category_count = $this->product;
+        
+        //phân trang
+        $curentPage = 1;
+        if($page > 0){
+            $curentPage = $page;
+        }
+         // trang hiện tại
+        $limit = 10; // số lượng sản phẩm có trong 1 trang
+        $perPage = $curentPage - 1;
+        $offset = intval($perPage * $limit);
+        $count = $this->category->countAllCategory();
+        $numberPage = ceil($count / $limit);
+        $category = $this->category->getAllCategory($offset,$limit);
+        $category_count = $this->productReponsitory;
         return view('admin.category.list', compact([
             'title',
             'category',
-            'category_count'
+            'category_count',
+            'numberPage'
         ]));
     }
     public function create()

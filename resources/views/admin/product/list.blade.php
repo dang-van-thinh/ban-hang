@@ -7,9 +7,7 @@
                 <th width="40px">STT</th>
                 <th>Tên sản phẩm</th>
                 <th>Giá sản phẩm</th>
-                <th>Số lượng</th>
-                <th>Size</th>
-                <th>Color</th>
+                <th>Ảnh</th>
                 <th>Hành động</th>
             </tr>
         </thead>
@@ -19,25 +17,38 @@
                     <td>{{ $items->id }}</td>
                     <td>{{ $items->name }}</td>
                     <td>{{ $items->price }}</td>
+                    <td>
+                        <img src="{{ asset($items->img) }}" alt="" width="100px">
+                    </td>
+                    {{-- <td>{{ $items->}}</td> --}}
                     {{-- @foreach ($items->quanity as $quanity_item)
                         <td>{{ $quanity_item->quanity }}</td>
                     @endforeach --}}
-                    @foreach ( $productVariant->getProductVariant($items->product_id) as $productVariantItem)
-                    @php
-                        $id_color = $productVariantItem->color_id;
-                        $id_size = $productVariantItem->size_id;
-                        $id_product = $items->product_id;
-                    @endphp
-                        <td> {{ $productVariant->getSizeWithProduct($id_size) }}</td>
-                        <td> {{ $productVariant->getColorWithProduct($id_color) }}</td>
-                        <td> {{ $productVariant->getQuanityWithProduct($id_color,$id_size,$id_product) }} </td>
-                    @endforeach
                     <td>
-                        <a href="del-product/{{ $items->id }}" class="btn btn-danger">Xóa</a>
-                        <a href="{{ route('admin.product.edit', $items->id ) }}" class="btn btn-warning">Sửa</a>
+                        <a href="{{ route('admin.product.delete', $items->id) }}" class="btn btn-danger">Xóa</a>
+                        <a href="{{ route('admin.product.edit', $items->id) }}" class="btn btn-warning">Sửa</a>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            @for ($i = 1; $i <= $numberPage; $i++)
+                <li class="page-item"><a class="page-link"
+                     href="{{ route('admin.product.index',$i) }}"> {{ $i }} </a></li>
+            @endfor
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
 @endsection

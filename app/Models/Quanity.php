@@ -10,18 +10,39 @@ class Quanity extends Model
     use HasFactory;
     protected $table='quanity';
     protected $fillable = [
-        'quanity',
+        'quanity_pr',
         'product_id',
         'id_color',
         'id_size'
     ];
-    public function product(){
-        return $this->belongsTo(Product::class);
+    public function getQuanity($id_product,$id_color,$id_size){
+        return Quanity::where('product_id',$id_product)
+        ->where('id_color',$id_color)
+        ->where('id_size',$id_size)
+        ->first();
     }
-    public function color(){
-        return $this->belongsTo(Color::class);
+    public function addQuanity($data){
+        return Quanity::insert($data);
     }
-    public function size(){
-        return $this->belongsTo(Size::class);
+    public function updateQuanity($id,$color,$size,$data){
+        return Quanity::where('product_id',$id)
+        ->where('id_color',$color)
+        ->where('id_size',$size)
+        ->update($data);
     }
+    public function delQuanity($id_product,$id_color,$id_size){
+        return Quanity::where('product_id',$id_product)
+        ->where('id_color',$id_color)
+        ->where('id_size',$id_size)
+        ->delete();
+    }
+    // public function product(){
+    //     return $this->belongsTo(Product::class)->onDelete('cascade');
+    // }
+    // public function color(){
+    //     return $this->belongsTo(Color::class);
+    // }
+    // public function size(){
+    //     return $this->belongsTo(Size::class);
+    // }
 }
