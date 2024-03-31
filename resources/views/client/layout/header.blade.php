@@ -1,9 +1,9 @@
 <header class="">
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg header_custom">
         <div class="container-fluid">
             <div class="navbar-brand nav_custom">
                 <a href="{{ route('home') }}">
-                    <img src="{{ asset('img/custom/log0-4.png') }}" alt="">
+                    <img src="{{ asset('img/custom/logo-2.png') }}" alt="">
                 </a>
             </div>
             {{-- <a class="" href="#">Navbar</a> --}}
@@ -28,7 +28,7 @@
                                 @foreach ($categoryChill->getCategoryChill($item->id) as $items)
                                     <li class="">
                                         <a class="dropdown-item"
-                                            href="{{ route('client.product', $items->id) }}">{{ $items->name }}</a>
+                                            href="{{ route('category', $items->id) }}">{{ $items->name }}</a>
                                     </li>
                                 @endforeach
 
@@ -54,11 +54,11 @@
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fas fa-user"></i>
                                 </a>
-                                @if ($checkLogin)
+                                @if (Auth::check())
                                     {{-- logined --}}
                                     <ul class="dropdown-menu me-5 me-n" style="transform: translate(-50px,0)">
-                                        <li><a class="dropdown-item" href="#">Thông tin người dùng</a></li>
-                                        <li><a class="dropdown-item" href="#">Đơn hàng</a></li>
+                                        <li><a class="dropdown-item" href="{{route('profiles.profile')}}">Thông tin người dùng</a></li>
+                                        <li><a class="dropdown-item" href="">Đơn hàng</a></li>
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
@@ -77,9 +77,10 @@
 
                             </li>
                             <li class="nav-item ">
-                                <a href="" class="nav-link text-secondary position-relative">
+                                <a href="{{route('cart')}}" class="nav-link text-secondary position-relative">
                                     <i class="fas fa-shopping-cart">
                                         <span
+                                        id="numberCart"
                                             class="position-absolute top-0 start-75 translate-middle badge rounded-pill bg-danger">
                                             1
                                         </span>

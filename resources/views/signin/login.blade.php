@@ -11,8 +11,8 @@
     @csrf
     <h5 class="text-center mb-4">Đăng nhập</h5>
     <div class="mb-3">
-        <label for="name" class="form-label">Email</label>
-        <input type="text" name="email" id="name" placeholder="Nhập email" class="form-control"
+        <label for="email" class="form-label">Email</label>
+        <input type="text" name="email" id="email" placeholder="Nhập email" class="form-control"
             value="{{ old('email') }}">
     </div>
     <div class="mb-3">

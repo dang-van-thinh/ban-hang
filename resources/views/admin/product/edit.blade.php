@@ -13,7 +13,7 @@
     <form action="{{ route('admin.product.update', $products[0]->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="row">
-            <h3> {{$products[0]->id}} </h3>
+            <h3> {{ $products[0]->id }} </h3>
             <div class="col-md-6">
                 <div class="mt-3">
                     <label for="name" class="form-label fw-bold">Tên sản phẩm</label>
@@ -39,11 +39,9 @@
                                 <select name="color[]" id="color" class="form-select">
                                     <option value="">[Chọn màu sản phẩm]</option>
                                     @foreach ($color as $item)
-                                        
-                                            <option {{ $pr_variant[$i]->color_id == $item->id ? 'selected' : '' }}
-                                                value="{{ $item->id }}">
-                                                {{ $item->name }}</option>
-                                       
+                                        <option {{ $products[$i]->idColor == $item->id ? 'selected' : '' }}
+                                            value="{{ $item->id }}">
+                                            {{ $item->name }}</option>
                                     @endforeach
                                     <option value="0">Không có</option>
                                 </select>
@@ -53,12 +51,9 @@
                                 <select name="size[]" id="size" class="form-select">
                                     <option value="">[Chọn size sản phẩm]</option>
                                     @foreach ($size as $item)
-                                        
-                                            <option
-                                                {{ $pr_variant[$i]->size_id == $item->id ? 'selected' : '' }}
-                                                value="{{ $item->id }}">
-                                                {{ $item->name }}</option>
-                                       
+                                        <option {{ $products[$i]->idSize == $item->id ? 'selected' : '' }}
+                                            value="{{ $item->id }}">
+                                            {{ $item->name }}</option>
                                     @endforeach
                                     <option value="0">Không có</option>
                                 </select>
@@ -66,7 +61,8 @@
                             <div class="col-4">
                                 <label for="quanity" class="form-label fw-bold">Số lượng sản phẩm</label>
                                 <input type="number" min="1" name="quanity[]" id="quanity"
-                                    placeholder="Nhập số lượng sản phẩm" class="form-control" value="{{ $products[$i]->quanity_pr }}">
+                                    placeholder="Nhập số lượng sản phẩm" class="form-control"
+                                    value="{{ $products[$i]->quanityProduct }}">
                             </div>
                         </div>
                     @endfor
@@ -97,11 +93,18 @@
                         placeholder="Nhập mô tả cho sản phẩm">{{ old('description', $products[0]->description) }}</textarea>
                 </div>
             </div>
-            <div class="mt-3">
+            <div class="mt-3 input-group">
+                <a href="{{ route('admin.product.index') }}" class="btn btn-primary">Quay lại</a>
                 <input type="submit" value="Thay đổi" class="btn btn-success">
             </div>
         </div>
     </form>
+    <script src="{{ asset('plugins/ckeditor/ckeditor.js') }}"></script>
+    <script>
+        CKEDITOR.replace('description', {
+            height: 450,
+        });
+    </script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
         $('.add-quanity').click(function(e) {

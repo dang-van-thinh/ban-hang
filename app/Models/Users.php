@@ -14,8 +14,13 @@ class Users extends Model
         'name',
         'email',
         'password',
+        'phone_number',
         'role_id',
         'created_at',
+        'province_id',
+        'district_id',
+        'ward_id',
+        'address'
     ];
     public static function hashRole($role)
     {
@@ -41,7 +46,7 @@ class Users extends Model
     }
     public function addUser($data)
     {
-        return Users::insert($data);
+        return Users::create($data);
     }
     public function delUser($id)
     {
@@ -50,6 +55,11 @@ class Users extends Model
     public function getOneUser($id)
     {
         return User::where('id', $id)->first();
+    }
+    public function findUser($email,$phone){
+        return User::where('email','like',$email)
+        ->orWhere('phone_number','=',$phone)
+        ->first();
     }
     public function updateUser($id, $data)
     {

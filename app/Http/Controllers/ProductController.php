@@ -12,7 +12,9 @@ use App\Models\Product;
 use App\Reponsitories\AttributeReponsitory;
 use DateTime;
 use DateTimeZone;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
@@ -39,6 +41,8 @@ class ProductController extends Controller
     }
     public function dashboard()
     {
+        // dd(Auth::user()->role_id);
+        // die;
         $title  = 'Quản lý trang bán hàng';
         return view('admin.dashboard', compact('title'));
     }
@@ -55,9 +59,9 @@ class ProductController extends Controller
         $limit = 10; // số lượng sản phẩm có trong 1 trang
         $perPage = $curentPage - 1;
         $offset = intval($perPage * $limit);
-        $count = $this->productReponsitory->countAllProduct();
+        $count = $this->productReponsitory->countProduct();
         $numberPage = ceil($count / $limit);
-        $product =  $this->productReponsitory->getAllProduct($offset,$limit);
+        $product =  $this->productReponsitory->getAllProduct($offset,$limit,0);
         //    dd($product);
         //    die;
         return view('admin.product.list', compact([
@@ -136,7 +140,8 @@ class ProductController extends Controller
     }
     public function delete($id)
     {
-        if ($this->productReponsitory->delProducts($id)) {
+        if ($this->productReponsitory->delProducts($id)) {  
+            // File::exists(''); xây dưng chức năng xóa ảnh sau khi xóa sản phẩm
             return redirect()->route('admin.product.index')->with('success', 'Xóa thành công sản phẩm !');
         }
     }
@@ -146,8 +151,8 @@ class ProductController extends Controller
         $size = $this->attReponsitory->getAllSize();
         $category = $this->category->getAllCategory();
         $products = $this->productReponsitory->getOneProduct($id);
-        $pr_variant = $this->productVariant->getOneProductVariant($id);
-        $number_variant = count($pr_variant);
+        // $pr_variant = $this->productVariant->getOneProductVariant($id);
+        $number_variant = count($products);
         // dd($products);
         // die;
         $title = 'Chỉnh sửa sản phẩm';
@@ -157,7 +162,6 @@ class ProductController extends Controller
             'category',
             'color',
             'size',
-            'pr_variant',
             'number_variant'
         ]));
     }

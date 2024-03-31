@@ -37,7 +37,8 @@
                             <select name="color[]" id="color" class="form-select">
                                 <option value="">[Chọn màu sản phẩm]</option>
                                 @foreach ($color as $item)
-                                    <option {{ in_array( $item->id,old('color',[])) == $item->id ? 'selected' : '' }} value="{{ $item->id }}">
+                                    <option {{ in_array($item->id, old('color', [])) == $item->id ? 'selected' : '' }}
+                                        value="{{ $item->id }}">
                                         {{ $item->name }}</option>
                                 @endforeach
                                 <option value="0">Không có</option>
@@ -48,7 +49,8 @@
                             <select name="size[]" id="size" class="form-select">
                                 <option value="">[Chọn size sản phẩm]</option>
                                 @foreach ($size as $item)
-                                    <option {{ in_array( $item->id,old('size',[])) == $item->id ? 'selected' : '' }} value="{{ $item->id }}">
+                                    <option {{ in_array($item->id, old('size', [])) == $item->id ? 'selected' : '' }}
+                                        value="{{ $item->id }}">
                                         {{ $item->name }}</option>
                                 @endforeach
                                 <option value="0">Không có</option>
@@ -57,12 +59,15 @@
                         <div class="col-4">
                             <label for="quanity" class="form-label fw-bold">Số lượng sản phẩm</label>
                             <input type="number" min="1" name="quanity[]" id="quanity"
-                                placeholder="Nhập số lượng sản phẩm" class="form-control" value="{{ in_array( $item->id,old('quanity',[] )) }}">
+                                placeholder="Nhập số lượng sản phẩm" class="form-control"
+                                value="{{ in_array($item->id, old('quanity', [])) }}">
                         </div>
                     </div>
-                    
+
                 </div>
-                <a href="" class="btn text-primary mt-3 add-quanity"><i class="fas fa-arrow-down"></i></a>
+                <div class="d-flex mt-3">
+                    <a href="" class="btn text-primary  add-quanity"><i class="fas fa-arrow-down"></i></a>
+                </div>
             </div>
             <div class="col-md-6">
                 <div class="mt-3">
@@ -81,8 +86,7 @@
                 </div>
                 <div class="mt-3">
                     <label for="description" class="form-label fw-bold">Mô tả sản phẩm</label>
-                    <textarea name="description" id="description" cols="30" rows="10" class="form-control"
-                        placeholder="Nhập mô tả cho sản phẩm">{{ old('description') }}</textarea>
+                    <textarea name="description" id="description" class="form-control" placeholder="Nhập mô tả cho sản phẩm">{{ old('description') }}</textarea>
                 </div>
             </div>
             <div class="mt-3">
@@ -90,18 +94,26 @@
             </div>
         </div>
     </form>
+    <script src="{{ asset('plugins/ckeditor/ckeditor.js') }}"></script>
+    <script>
+        CKEDITOR.replace('description', {
+            height: 450
+        });
+    </script>
+
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
-        $('.add-quanity').click(function(e) {
-            e.preventDefault();
-            let html = `
-            <div class="row mt-4">
+        $(document).ready(function() {
+            $('.add-quanity').click(function(e) {
+                e.preventDefault();
+                let html = `
+            <div class="row mt-4 att">
                         <div class="col-4">
                             <label for="color" class="form-label fw-bold">Màu sản phẩm</label>
                             <select name="color[]" id="color" class="form-select">
                                 <option value="">[Chọn màu sản phẩm]</option>
                                 @foreach ($color as $item)
-                                    <option {{ in_array( $item->id,old('color',[])) == $item->id ? 'selected' : '' }} value="{{ $item->id }}">
+                                    <option {{ in_array($item->id, old('color', [])) == $item->id ? 'selected' : '' }} value="{{ $item->id }}">
                                         {{ $item->name }}</option>
                                 @endforeach
                                 <option value="0">Không có</option>
@@ -112,7 +124,7 @@
                             <select name="size[]" id="size" class="form-select">
                                 <option value="">[Chọn size sản phẩm]</option>
                                 @foreach ($size as $item)
-                                    <option {{ in_array( $item->id,old('size',[])) == $item->id ? 'selected' : '' }} value="{{ $item->id }}">
+                                    <option {{ in_array($item->id, old('size', [])) == $item->id ? 'selected' : '' }} value="{{ $item->id }}">
                                         {{ $item->name }}</option>
                                 @endforeach
                                 <option value="0">Không có</option>
@@ -121,11 +133,24 @@
                         <div class="col-4">
                             <label for="quanity" class="form-label fw-bold">Số lượng sản phẩm</label>
                             <input type="number" min="1" name="quanity[]" id="quanity"
-                                placeholder="Nhập số lượng sản phẩm" class="form-control" value="{{ in_array( $item->id,old('quanity',[] )) }}">
+                                placeholder="Nhập số lượng sản phẩm" class="form-control" value="{{ in_array($item->id, old('quanity', [])) }}">
                         </div>
+
+                    <a href="" onclick="deleteAttribute()" class="btn text-danger btn-danger delete_attribute"><i class="fas fa-backspace"></i></a>
+
                     </div>
            `;
-           $(".attribute").append(html);
+                $(".attribute").append(html);
+
+
+            });
+
+            function deleteAttribute(e) {
+                e.preventDefault();
+                alert('hhhh')
+            }
+
+
         });
     </script>
 @endsection

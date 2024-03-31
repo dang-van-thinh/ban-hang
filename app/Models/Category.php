@@ -20,6 +20,9 @@ class Category extends Model
             return Category::all();
         }
     }
+    public function getCategoryForProduct($id_category){
+        return Category::where('id','=',$id_category)->first();
+    }
 
     public function getCategoryParent(){
         return Category::where('type','=',0)->get();

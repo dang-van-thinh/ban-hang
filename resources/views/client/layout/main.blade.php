@@ -14,14 +14,21 @@
     @include('client.layout.header')
     {{-- //phần đầu  --}}
 
+    @include('client.layout.popup')
+
     <div class="container-fluid">
         <article>
             @yield('content')
         </article>
     </div>
+    @isset($scriptCode)
+        {!! $scriptCode !!}
+    @endisset ()
 
     @include('client.layout.footer')
 </body>
 @include('client.layout.script')
+
+</script>
 
 </html>

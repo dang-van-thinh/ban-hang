@@ -41,18 +41,24 @@ class LoginCotronller extends Controller
             'name'=>$request->name,
             'email'=>$request->email,
             'password'=>Hash::make($request->pw),
-            'role_id'=>1,
+            'phone_number'=>$request->phone_number,
+            'role_id'=>2,
             'created_at'=> $this->time->setTimezone($this->timezone),
         ];
         if($this->users->addUser($data)){
-            return redirect()->route('login.index')->with('success','Tạo tài khoản thành công !');
+            return redirect()->route('home')->with('success','Tạo tài khoản thành công !');
         }
     }
     public function login(AuthRequest $request){
+        $request->flash();
         $cr = [
             'email'=>$request->input('email'),
             'password'=>$request->input('pw')
         ];
+        // $pwtk = '$2y$12$xLcqx1EB5i1x5RQr8gi0M.dJBgpY.kU44F4rSEFEscejkNof8wZ3G';
+        // $pw = '0123456789';
+        // dd(Hash::check($pw,$pwtk));
+        // die;
 
         if(Auth::attempt($cr)){
            $role = Auth::user()->role_id;
@@ -65,7 +71,7 @@ class LoginCotronller extends Controller
         }else{
             return redirect()->route('home')->with('error','Kiểm tra lại tài khoản và mật khẩu, do không chính xác !');
         }
-        $request->flash();
+        
     }
     public function logout(Request $request){
         Auth::logout();

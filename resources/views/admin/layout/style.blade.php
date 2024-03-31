@@ -11,7 +11,8 @@
     href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" 
     crossorigin="anonymous"/>
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{asset('img/favicon/favicon.ico')}}" />
+    
+<link rel="icon" href="{{asset('img/custom/OIG2.jpg')}}" type="image/png">
     <!-- Icons. Uncomment required icon fonts -->
     <link rel="stylesheet" href="{{asset('vendor/fonts/boxicons.css')}}" />
 

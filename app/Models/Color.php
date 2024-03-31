@@ -19,4 +19,14 @@ class Color extends Model
     public function quanity(){
         return $this->hasMany(Quanity::class);
     }
+    public function getAllColor(){
+        return Color::all();
+    }
+    public function getColorForProduct($id_product){
+        return Color::join('quanity','quanity.id_color','=','color.id')
+        ->select('color.name as nameColor','color.id as idColor','color.value as valueColor')
+        ->distinct()
+        ->where('quanity.product_id','=',$id_product)
+        ->get();
+    }
 }

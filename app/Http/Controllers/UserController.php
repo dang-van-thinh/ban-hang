@@ -58,6 +58,7 @@ class UserController extends Controller
         $data = [
             'name'=>$request->name,
             'email'=>$request->email,
+            'phone_number'=>$request->phone_number,
             'password'=>Hash::make($request->password),
             'role_id'=>$request->input('role'),
             'created_at'=>$this->dateTime->setTimezone($this->timeZone),
@@ -86,7 +87,7 @@ class UserController extends Controller
         $data = [
             'name'=>$request->name,
             'email'=>$request->email,
-            'password'=>Hash::make($request->password),
+            'phone_number'=>$request->phone_number,
             'role_id'=>$request->input('role'),
             'updated_at'=> $this->dateTime->setTimezone($this->timeZone),
         ];

@@ -24,7 +24,7 @@ class UserRequest extends FormRequest
         return [
             'name'=>'required',
             'email'=>'required|email',
-            'password'=>'required|min:8',
+            'phone_number'=>'required',
             //
         ];
     }
@@ -33,8 +33,7 @@ class UserRequest extends FormRequest
             'name.required'=>'Không được để trống tên ',
             'email.required'=>'Không được để trống email',
             'email.email'=>'Sai định dạng email',
-            'password.required'=>'Không được để trống mật khẩu',
-            'password.min'=>'Mật khẩu tối thiểu là 8 ký tự'
+            'phone_number.required'=>'Không được để trống số điện thoại'
         ];
     }
 }

@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\AttributeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\LoginCotronller;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -71,6 +73,21 @@ Route::prefix('page')->name('client.')->group(function () {
     Route::get('product/{id_category}',[ClientController::class,'product'])->name('product');
 });
 Route::get('/', [ClientController::class,'home'])->name('home');
+Route::get('category/{id_category?}', [ClientController::class,'category'])->name('category');
+Route::get('category-view',[ClientController::class,'view'])->name('view');
+Route::get('detail-product/{id_product}', [ClientController::class,'detailProduct'])->name('detailProduct');
+Route::get('cart', [ClientController::class,'cartProduct'])->name('cart');
+Route::get('order', [ClientController::class,'orderProduct'])->name('order');
+Route::post('store-order',[ClientController::class,'storeOrder'])->name('storeOrder');
+Route::get('ordered/{id}', [ClientController::class,'orderedProduct'])->name('ordered');
+Route::get('bill/{id}', [ClientController::class,'bill'])->name('bill');
+
+Route::prefix('profiles')->name('profiles.')->middleware('authen')->group(function(){
+Route::get('profile-infor',[ProfileController::class,'profile'])->name('profile');
+});
+
+
+// Route::get('testApi', [ClientController::class,'testApi'])->name('api');
 
 // Route::get('', [LoginCotronller::class, 'index'])->name('login.index');
 Route::get('signup', [LoginCotronller::class, 'signup'])->name('signup')->middleware('login');

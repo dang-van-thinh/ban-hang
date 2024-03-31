@@ -25,6 +25,11 @@
                         class="form-control" value="{{ old('email') }}">
                 </div>
                 <div class="mt-3">
+                    <label for="phone_number" class="form-label fw-bold">Số điện thoại</label>
+                    <input type="tel" name="phone_number" id="phone_number" placeholder="Nhập số điện thoại"
+                        class="form-control" value="{{ old('phone_number') }}">
+                </div>
+                <div class="mt-3">
                     <label for="password" class="form-label fw-bold">Mật khẩu</label>
                     <input type="password" name="password" id="passworld"
                         placeholder="Nhập mật khẩu" class="form-control" 

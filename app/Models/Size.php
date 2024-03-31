@@ -18,4 +18,14 @@ class Size extends Model
     public function quanity(){
         return $this->hasMany(Quanity::class);
     }
+    public function getAllSize(){
+        return Size::all();
+    }
+    public function getSizeForProduct($id_product){
+        return Size::join('quanity','quanity.id_size','=','size.id')
+        ->select('size.name as nameSize','size.id as idSize')
+        ->distinct()
+        ->where('quanity.product_id','=',$id_product)
+        ->get();
+    }
 }

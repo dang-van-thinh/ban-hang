@@ -21,7 +21,8 @@ class Product extends Model
     'img',
     'description',
     'rating',
-    'category_id'
+    'category_id',
+    'views'
   ];
   // public function category()
   // {

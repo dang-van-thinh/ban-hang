@@ -10,7 +10,7 @@
                         <td>Tên thuộc tính</td>
                         <td>Giá trị</td>
                         <td>
-                            <a href="" class="btn btn-primary">Thêm mới </a>
+                            <a href="{{route('admin.att.create')}}" class="btn btn-primary">Thêm mới </a>
                         </td>
                     </tr>
                 </thead>
@@ -38,7 +38,7 @@
                         <td>STT</td>
                         <td>Tên thuộc tính</td>
                         <td>
-                            <a href="" class="btn btn-primary">Thêm mới </a>
+                            <a href="{{route('admin.att.create')}}" class="btn btn-primary">Thêm mới </a>
                         </td>
                     </tr>
                 </thead>

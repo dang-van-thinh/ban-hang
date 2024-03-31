@@ -25,10 +25,9 @@
                         class="form-control" value="{{ old('email',$user->email) }}">
                 </div>
                 <div class="mt-3">
-                    <label for="password" class="form-label fw-bold">Mật khẩu</label>
-                    <input type="password" name="password" id="passworld"
-                        placeholder="Nhập mật khẩu" class="form-control" 
-                        value="{{ old('password',$user->password) }}">
+                    <label for="phone_number" class="form-label fw-bold">Số điện thoại</label>
+                    <input type="tel" name="phone_number" id="phone_number" placeholder="Nhập số điện thoại"
+                        class="form-control" value="{{ old('phone_number',$user->phone_number) }}">
                 </div>
                 <div class="mt-3">
                     <label for="role" class="form-label fw-bold">Vai trò</label>
@@ -39,8 +38,9 @@
                     </select>
                 </div>
             </div>
-            <div class="mt-3">
-                <input type="submit" value="Thêm mới" class="btn btn-success">
+            <div class="mt-3 input-group">
+                <a href="{{route('admin.user.index')}}" class="btn btn-primary"> Quay lại</a>
+                <input type="submit" value="Lưu" class="btn btn-success px-5">
             </div>
         </div>
     </form>

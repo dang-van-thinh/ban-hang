@@ -74,92 +74,24 @@
             <div class="mt-5">
                 <h4 class="my-5 text-uppercase fw-bold">Sản phẩm mới nhất</h4>
                 <div class="row">
+                    @foreach ($productsNew as $product)
+                        
                     <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-3">
                         <div class="product">
-                            <a href="">
-                                <img src="{{ asset('img/custom/product/giay-tt-1.avif') }}" alt=""
+                            <a href="{{route('detailProduct',$product->id)}}">
+                                <div class="image_product ">
+                                    <img src="{{ asset($product->img) }}" alt=""
                                     class="text-center">
-                                <div class="mt-2">
-                                    <h5 class="fw-medium text-secondary">Tên sẩn phẩm</h5>
-                                    <p class="text-danger fw-bold">145.000 <span>đ</span></p>
+                                </div>
+                                <div class="des_product ps-3">
+                                    <h5 class="fw-medium text-secondary">{{$product->name}}</h5>
+                                    <p class="text-danger fw-bold">{{number_format($product->price, 0, ',', '.')}} <span>VNĐ</span></p>
                                 </div>
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-3">
-                        <div class="product">
-                            <a href="">
-                                <img src="{{ asset('img/custom/product/giay-tt-2.avif   ') }}" alt=""
-                                    class="text-center">
-                                <div class="mt-2">
-                                    <h5 class="fw-medium text-secondary">Tên sẩn phẩm</h5>
-                                    <p class="text-danger fw-bold">145.000 <span>đ</span></p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-3">
-                        <div class="product">
-                            <a href="">
-                                <img src="{{ asset('img/custom/product/áo đá bóng (1).jpg') }}" alt=""
-                                    class="text-center">
-                                <div class="mt-2">
-                                    <h5 class="fw-medium text-secondary">Tên sẩn phẩm</h5>
-                                    <p class="text-danger fw-bold">145.000 <span>đ</span></p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-3">
-                        <div class="product">
-                            <a href="">
-                                <img src="{{ asset('img/custom/product/giay-tt-1.avif') }}" alt=""
-                                    class="text-center">
-                                <div class="mt-2">
-                                    <h5 class="fw-medium text-secondary">Tên sẩn phẩm</h5>
-                                    <p class="text-danger fw-bold">145.000 <span>đ</span></p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-3">
-                        <div class="product">
-                            <a href="">
-                                <img src="{{ asset('img/custom/product/giay-tt-1.avif') }}" alt=""
-                                    class="text-center">
-                                <div class="mt-2">
-                                    <h5 class="fw-medium text-secondary">Tên sẩn phẩm</h5>
-                                    <p class="text-danger fw-bold">145.000 <span>đ</span></p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-3">
-                        <div class="product">
-                            <a href="">
-                                <img src="{{ asset('img/custom/product/áo đá bóng (1).jpg') }}" alt=""
-                                    class="text-center">
-                                <div class="mt-2">
-                                    <h5 class="fw-medium text-secondary">Tên sẩn phẩm</h5>
-                                    <p class="text-danger fw-bold">145.000 <span>đ</span></p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-3">
-                        <div class="product">
-                            <a href="">
-                                <div class="image_product">
-                                    <img src="{{ asset('img/custom/product/áo đá bóng (1).jpg') }}" alt=""
-                                    class="text-center">
-                                </div>
-                                <div class="mt-2">
-                                    <h5 class="fw-medium text-secondary">Tên sẩn phẩm</h5>
-                                    <p class="text-danger fw-bold">145.000 <span>đ</span></p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+                    @endforeach
+                    
                 </div>
             </div>
             {{-- banner  --}}
@@ -186,60 +118,19 @@
                 <div class="row">
                     <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-3">
                         <div class="product">
-                            <a href="">
-                                <div class="image_product">
-                                    <img src="{{ asset('img/custom/product/áo đá bóng (1).jpg') }}" alt=""
+                            <a href="{{route('detailProduct',$product->id)}}">
+                                <div class="image_product ">
+                                    <img src="{{ asset($product->img) }}" alt=""
                                     class="text-center">
                                 </div>
-                                <div class="mt-2">
-                                    <h5 class="fw-medium text-secondary">Tên sẩn phẩm</h5>
-                                    <p class="text-danger fw-bold">145.000 <span>đ</span></p>
+                                <div class="mt-2 des_product ps-3">
+                                    <h5 class="fw-medium text-secondary">{{$product->name}}</h5>
+                                    <p class="text-danger fw-bold">{{number_format($product->price, 0, ',', '.')}} <span>VNĐ</span></p>
                                 </div>
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-3">
-                        <div class="product">
-                            <a href="">
-                                <div class="image_product">
-                                    <img src="{{ asset('img/custom/product/áo đá bóng (1).jpg') }}" alt=""
-                                    class="text-center">
-                                </div>
-                                <div class="mt-2">
-                                    <h5 class="fw-medium text-secondary">Tên sẩn phẩm</h5>
-                                    <p class="text-danger fw-bold">145.000 <span>đ</span></p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-3">
-                        <div class="product">
-                            <a href="">
-                                <div class="image_product">
-                                    <img src="{{ asset('img/custom/product/áo đá bóng (1).jpg') }}" alt=""
-                                    class="text-center">
-                                </div>
-                                <div class="mt-2">
-                                    <h5 class="fw-medium text-secondary">Tên sẩn phẩm</h5>
-                                    <p class="text-danger fw-bold">145.000 <span>đ</span></p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-3">
-                        <div class="product">
-                            <a href="">
-                                <div class="image_product">
-                                    <img src="{{ asset('img/custom/product/áo đá bóng (1).jpg') }}" alt=""
-                                    class="text-center">
-                                </div>
-                                <div class="mt-2">
-                                    <h5 class="fw-medium text-secondary">Tên sẩn phẩm</h5>
-                                    <p class="text-danger fw-bold">145.000 <span>đ</span></p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+                    
                 </div>
                 <div class="mt-5">
                     <div class="text-center">
@@ -251,66 +142,27 @@
             <div class="mt-5">
                 <h5 class="text-uppercase fw-bold my-5">Sản phẩm nhiều lượt xem nhất</h5>
                 <div class="row">
+                    @foreach ($productByView as $productView)
                     <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-3">
                         <div class="product">
-                            <a href="">
-                                <div class="image_product">
-                                    <img src="{{ asset('img/custom/product/áo đá bóng (1).jpg') }}" alt=""
+                            <a href="{{route('detailProduct',$productView->id)}}">
+                                <div class="image_product ">
+                                    <img src="{{ asset($productView->img) }}" alt=""
                                     class="text-center">
                                 </div>
-                                <div class="mt-2">
-                                    <h5 class="fw-medium text-secondary">Tên sẩn phẩm</h5>
-                                    <p class="text-danger fw-bold">145.000 <span>đ</span></p>
+                                <div class="mt-2 des_product ps-3">
+                                    <h5 class="fw-medium text-secondary">{{$productView->name}}</h5>
+                                    <p class="text-danger fw-bold">{{number_format($productView->price, 0, ',', '.')}} <span>VNĐ</span></p>
                                 </div>
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-3">
-                        <div class="product">
-                            <a href="">
-                                <div class="image_product">
-                                    <img src="{{ asset('img/custom/product/áo đá bóng (1).jpg') }}" alt=""
-                                    class="text-center">
-                                </div>
-                                <div class="mt-2">
-                                    <h5 class="fw-medium text-secondary">Tên sẩn phẩm</h5>
-                                    <p class="text-danger fw-bold">145.000 <span>đ</span></p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-3">
-                        <div class="product">
-                            <a href="">
-                                <div class="image_product">
-                                    <img src="{{ asset('img/custom/product/áo đá bóng (1).jpg') }}" alt=""
-                                    class="text-center">
-                                </div>
-                                <div class="mt-2">
-                                    <h5 class="fw-medium text-secondary">Tên sẩn phẩm</h5>
-                                    <p class="text-danger fw-bold">145.000 <span>đ</span></p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-3">
-                        <div class="product">
-                            <a href="">
-                                <div class="image_product">
-                                    <img src="{{ asset('img/custom/product/áo đá bóng (1).jpg') }}" alt=""
-                                    class="text-center">
-                                </div>
-                                <div class="mt-2">
-                                    <h5 class="fw-medium text-secondary">Tên sẩn phẩm</h5>
-                                    <p class="text-danger fw-bold">145.000 <span>đ</span></p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+                    @endforeach
+                    
                 </div>
                 <div class="mt-5">
                     <div class="text-center">
-                        <a href="" class="btn btn-outline-danger">Xem thêm...</a>
+                        <a href="{{route('view',null)}}" class="btn btn-outline-danger">Xem thêm...</a>
                     </div>
                 </div>
             </div>

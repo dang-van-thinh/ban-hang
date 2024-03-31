@@ -31,7 +31,8 @@
                 </div>
 
             </div>
-            <div class="mt-3">
+            <div class="mt-3 input-group">
+                <a href="{{route('admin.category.index')}}" class="btn btn-primary">Quay lại</a>
                 <input type="submit" value="Thêm mới" class="btn btn-success">
             </div>
         </div>
