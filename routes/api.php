@@ -22,6 +22,6 @@ Route::post('ajax-detail-product',[AjaxController::class,'quanityForColorAndSize
 Route::get('ajax-districts',[AjaxController::class,'findDistrictsForProvince'])->name('ajaxDistricts');
 Route::get('ajax-wards',[AjaxController::class,'findWardsForDistrict'])->name('ajaxWards');
 Route::get('ajax-product-limit',[AjaxController::class,'allProductOffset'])->name('ajaxProductOffset');
-Route::get('ajax-product-filter',[AjaxController::class,'productFilter'])->name('ajaxProductFilter');
+Route::get('ajax-product-filter',[AjaxController::class,'productFilter'])->name('ajaxProductFilter'); 
 
 // Route::get('test',[AjaxController::class,'testController'])->name('test');

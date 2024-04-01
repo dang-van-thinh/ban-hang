@@ -1,16 +1,13 @@
 @extends('client.layout.main')
 @section('content')
     <div class="container mt-3">
-        <form action="">
+        <form id="form_filter_product">
             <div class="row">
                 <div class="col-2 border-end">
                     <hr>
                     <div class="mt-3">
-                        <input type="hidden" name="" 
-                        id="methodCategory" 
-                        data-category="{{$products['category']}}"
-                        data-orderby="{{$products['orderBy']}}"
-                        >
+                        <input type="hidden" name="" id="methodCategory" data-category="{{ $products['category'] }}"
+                            data-orderby="{{ $products['orderBy'] }}">
                         <div class="mt-3">
                             <label for="" class="fw-bold form-label">Thương hiệu:</label> <br>
                             <div class="form-check">
@@ -23,8 +20,8 @@
                             <label for="" class="fw-bold form-label">Màu:</label> <br>
                             @foreach ($color as $item)
                                 <div class="form-check">
-                                    <input type="checkbox" name="color" value="{{$item->id}}" id="color_{{ $item->id }}"
-                                        class="form-check-input">
+                                    <input type="checkbox" name="color" value="{{ $item->id }}"
+                                        id="color_{{ $item->id }}" class="form-check-input">
                                     <label class="bg_color" style="background-color: {{ $item->value }}"
                                         for="color_{{ $item->id }}"></label>
                                 </div>
@@ -44,7 +41,7 @@
                             </div>
                         </div>
                         <div class="mt-3">
-                            <button class="btn btn-primary" type="submit">Lọc</button>
+                            <button class="btn btn-primary" id="btn_filter_product" type="button">Lọc</button>
                         </div>
                     </div>
                 </div>
@@ -76,17 +73,17 @@
                             <div class="input-group">
                                 <label for="" class="fw-bold input-group-text">Sắp xếp :</label>
                                 <select name="orderby" id="orderby" class="form-select">
-                                    <option value="price-1">Giá Cao -> Thấp</option>
-                                    <option value="price-2">Giá Thấp -> Cao</option>
-                                    <option value="name-1">Tên A -> Z</option>
-                                    <option value="name-2">Tên Z -> A</option>
+                                    <option value="1">Giá Cao -> Thấp</option>
+                                    <option value="2">Giá Thấp -> Cao</option>
+                                    <option value="3">Tên A -> Z</option>
+                                    <option value="4">Tên Z -> A</option>
                                 </select>
                             </div>
 
                         </div>
                     </div>
                     <div class="border-top mb-3">
-                        <div class="row " id="show_product">
+                        <div class="row" id="show_product">
                             @foreach ($products['products'] as $product)
                                 <div class="col-lg-3 col-md-6 col-sm-6 col-6 mt-3">
                                     <div class="product">
@@ -117,7 +114,7 @@
                                         <li class="page-item">
                                             <a class="page-link item-page" data-orderby="{{ $products['orderBy'] }}"
                                                 data-category="{{ $products['category'] }}"
-                                                data-page="{{ $i }}" data-limit="2" href="#">
+                                                data-page="{{ $i }}" data-limit="12" href="#">
                                                 {{ $i }} </a>
                                         </li>
                                     @endfor
@@ -144,16 +141,6 @@
                 $('#maxPrice').text($('#rangePrice').val())
             })
 
-            $('#orderby').change(function(){
-                let _this = $(this);
-                
-                console.log(_this);
-            })
-            $('input[name=color]').change(function() {
-                let color =  $('input[name=color]:checked');
-                let size = $('input[name=size]')
-                console.log(color);
-            })
 
             $('.item-page').click(function(e) {
                 e.preventDefault()
@@ -209,27 +196,76 @@
                     }
                 });
             }
+            $('#orderby').change(function() {
+                // e.preventDefault()
+                filterProduct();
+            });
+            $('#btn_filter_product').click(function(e){
+                e.preventDefault();
+                filterProduct();
+            })
 
-            
+            function filterProduct() {
+                let category = $('#methodCategory').data('category');
+                let colorChecked = $('input[name=color]:checked');
+                let sizeChecked = $('input[name=size]:checked');
+                let color = [];
+                let size = [];
+                // let price = $('#rangePrice').val();
+                let price = 5000000;
+                let orderby = $('#orderby').val();
+                console.log(colorChecked);
+                if (colorChecked.length > 0) {
+                    for (const item of colorChecked) {
+                        color.push(item.value);
+                    }
+                } else {
+                    color = null;
+                }
 
-            function filterProduct(color,size,price,orderby){
+                if (sizeChecked.length > 0) {
+                    for (const item of sizeChecked) {
+                        size.push(item.value);
+                    }
+                } else {
+                    size = null;
+                }
 
                 let data = {
-                    color:color,
-                    size:size,
-                    price:price,
-                    orderby:orderby
+                    color: color,
+                    size: size,
+                    price: price,
+                    orderby: orderby,
+                    category: category
                 }
                 $.ajax({
-                    type: "get",
-                    url: "url",
+                    type: "GET",
+                    url: "{{ route('ajaxProductFilter') }}",
                     data: data,
                     dataType: "json",
-                    success: function (response) {
-                        console.log(response);
-                    },
-                    error:function(er){
-                        console.log(er);
+                    success: function(res) {
+                        console.log(res.products);
+                        let html = '';
+                        res.products.forEach(el => {
+                            let price = el.price.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+                            html += `
+                            <div class="col-lg-3 col-md-6 col-sm-6 col-6 mt-3">
+                                    <div class="product">
+                                        <a href="{{ asset('detail-product/${el.id}') }}">
+                                            <div class="image_product ">
+                                                <img src="{{ asset('${el.img}') }}" alt="" class="text-center">
+                                            </div>
+                                            <div class=" des_product ps-3">
+                                                <h5 class="fw-medium text-secondary">${el.name}</h5>
+                                                <p class="text-danger fw-bold">
+                                                    ${price} <span>VNĐ</span></p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                        $('#show_product').html(html)
                     }
                 });
             }

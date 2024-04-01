@@ -80,7 +80,7 @@ class ClientController extends Controller
     {
         $title = 'Sản phẩm có nhiều lượt xem nhất';
         $curentPage = 1;
-        $limit = 2;
+        $limit = 12;
         $countProduct = $this->productReponsitory->countProduct();
         $numberPage = ceil($countProduct / $limit);
         $product = $this->productReponsitory->getAllProduct($curentPage, $limit,null,0);

@@ -76,11 +76,17 @@ class AjaxController extends Controller
         return response()->json($data);
     }
     public function productFilter(Request $request){
+        // dd($request->all());
+        
         $color = $request->input('color');
         $size = $request->input('size');
         $price = $request->input('price');
         $orderBy = $request->input('orderby');
-        $product = $this->productReponsitories->filterProduct($color,$size,$price,$orderBy);
+        $category = $request->input('category');
+        
+        $product = $this->productReponsitories->filterProduct($color,$size,$price,$orderBy,$category);
+        // dd($product);
+        // die;
         $data = [
             'products'=>$product
         ];
