@@ -17,10 +17,12 @@ class LoginCotronller extends Controller
     protected $users;
     protected $time;
     protected $timezone;
+    protected $mail;
     public function __construct(){
         $this->users = new Users();
         $this->time = new DateTime();
         $this->timezone = new DateTimeZone('Asia/Ho_Chi_Minh');
+        $this->mail = new EmailController();
     }
     //
     public function index(){
@@ -45,6 +47,8 @@ class LoginCotronller extends Controller
             'role_id'=>2,
             'created_at'=> $this->time->setTimezone($this->timezone),
         ];
+        // xác thực email là đúng
+        ///
         if($this->users->addUser($data)){
             return redirect()->route('home')->with('success','Tạo tài khoản thành công !');
         }
@@ -79,4 +83,5 @@ class LoginCotronller extends Controller
         $request->session()->regenerateToken();
         return redirect()->route('home')->with('success','Đăng xuất thành công !');
    }
+   
 }

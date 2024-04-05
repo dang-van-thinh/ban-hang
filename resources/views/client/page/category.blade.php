@@ -30,12 +30,12 @@
                         <hr>
                         <div class="mt-3">
                             <label for="rangePrice" class="form-label fw-bold">Giá </label>
-                            <input type="range" name="rangePrice" class="form-range" min="0" max="1000"
-                                value="1000" id="rangePrice">
+                            <input type="range" name="rangePrice" class="form-range" min="0" max="{{$products['priceMax']}}"
+                                value="{{$products['priceMax']}}" step="10000" id="rangePrice">
                             <div class="min-max-price">
                                 <span class="min-price">0 VNĐ</span>
                                 <span class="max-price">
-                                    <output name="maxPrice" id="maxPrice">1000</output>
+                                    <output name="maxPrice" id="maxPrice">{{ number_format($products['priceMax'], 0, ',', '.') }}</output>
                                     VNĐ
                                 </span>
                             </div>

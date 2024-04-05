@@ -20,8 +20,8 @@
 
                     @foreach ($category as $item)
                         <li class="nav-item dropdown me-2">
-                            <a class="nav-link dropdown-toggle fw-bold" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
+                            <a class="nav-link dropdown-toggle fw-bold" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
                                 {{ $item->name }}
                             </a>
                             <ul class="dropdown-menu">
@@ -49,38 +49,40 @@
                     </form>
                     <div class="d-flex">
                         <ul class="nav me-5 ">
-                            <li class="nav-item dropdown me-4 w-25 dropdow_custom">
-                                <a class="nav-link dropdown-toggle text-secondary" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fas fa-user"></i>
-                                </a>
-                                @if (Auth::check())
+                            @if (Auth::check())
+                                <li class="nav-item dropdown me-4 w-25 dropdow_custom">
+                                    <a class="nav-link dropdown-toggle text-secondary" href="#" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fas fa-user"></i>
+                                    </a>
+
                                     {{-- logined --}}
                                     <ul class="dropdown-menu me-5 me-n" style="transform: translate(-50px,0)">
-                                        <li><a class="dropdown-item" href="{{route('profiles.profile')}}">Thông tin người dùng</a></li>
-                                        <li><a class="dropdown-item" href="{{route('profiles.profile-bill')}}">Đơn hàng</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('profiles.profile') }}">Thông tin
+                                                người dùng</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('profiles.profile-bill') }}">Đơn
+                                                hàng</a></li>
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
                                         <li><a class="dropdown-item" href="{{ route('logout') }}">Đăng xuất</a></li>
                                     </ul>
-                                @else
-                                    <div class="dropdown-menu me-5 dropdown_item_custom" id="form-login">
-                                        @include('signin.login')
-                                    </div>
-                                    {{-- register --}}
-                                    <div class="dropdown-menu me-5 dropdown_item_custom" id="form-register">
-                                        @include('signin.register')
-                                    </div>
-                                @endif
-
-
-                            </li>
+                                </li>
+                            @else
+                                <li class="nav-item">
+                                    <button class="btn text-secondary btn_overplay" 
+                                        data-overplay-target="#formLogin">
+                                        <i class="fas fa-user"></i>
+                                    </button>
+                                    @include('signin.login')
+                                    @include('signin.register')
+                                    {{-- @include('signin.forgot-password') --}}
+                                </li>
+                            @endif
                             <li class="nav-item ">
-                                <a href="{{route('cart')}}" class="nav-link text-secondary position-relative">
+                                <a href="{{ route('cart') }}" class="nav-link text-secondary position-relative">
                                     <i class="fas fa-shopping-cart">
-                                        <span
-                                        id="numberCart"
+                                        <span id="numberCart"
                                             class="position-absolute top-0 start-75 translate-middle badge rounded-pill bg-danger">
                                             1
                                         </span>

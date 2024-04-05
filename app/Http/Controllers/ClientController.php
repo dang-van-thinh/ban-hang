@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AuthRequest;
 use App\Http\Requests\OrderRequest;
+use App\Mail\MailRepassed;
 use App\Models\Bill;
 use App\Models\Category;
 use App\Models\Color;
@@ -21,6 +23,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class ClientController extends Controller
@@ -58,7 +61,6 @@ class ClientController extends Controller
     //
     public function home()
     {
-
         $title = 'SPORT DA1 | Cửa hàng thể thao';
         $categoryChill = $this->category;
         $productsNew = $this->productReponsitory->getProductsNewLimit();
@@ -83,13 +85,13 @@ class ClientController extends Controller
         $limit = 12;
         $countProduct = $this->productReponsitory->countProduct();
         $numberPage = ceil($countProduct / $limit);
-        $product = $this->productReponsitory->getAllProduct($curentPage, $limit,null,0);
+        $product = $this->productReponsitory->getAllProduct($curentPage, $limit, null, 0);
         // dd($products);
         // die;
         $products = [
-            'products'=>$product,
-            'orderBy'=>'views',
-            'category'=>0
+            'products' => $product,
+            'orderBy' => 'views',
+            'category' => 0
         ];
         $script = [
             'js/client/libs/category.js'
@@ -109,25 +111,30 @@ class ClientController extends Controller
             'script'
         ));
     }
-    public function category($id_category=null)
+    public function category($id_category = null)
     {
         $limit = 12;
         $currentPage = 1;
         $offset = ($currentPage - 1) * $limit;
         if ($id_category) {
             $product = $this->productReponsitory->getProductWithCategory($id_category, $offset, $limit);
-            $products=[
-                'products'=>$product,
-                'category'=>$id_category,
-                'orderBy'=>null
+            $priceMax = $this->productReponsitory->getPriceMax($id_category);
+            $products = [
+                'products' => $product,
+                'category' => $id_category,
+                'orderBy' => null,
+                'priceMax' => $priceMax
             ];
             $countProduct = $this->productReponsitory->countProduct($id_category);
         } else {
             $product = $this->productReponsitory->getAllProduct($offset, $limit);
-            $products=[
-                'products'=> $product,
-                'category'=> 0,
-                'orderBy'=>null
+            $priceMax = $this->productReponsitory->getPriceMax();
+
+            $products = [
+                'products' => $product,
+                'category' => 0,
+                'orderBy' => null,
+                'priceMax' => $priceMax
             ];
             // dd($product);
             // die;
@@ -358,6 +365,35 @@ class ClientController extends Controller
     public function bill($id)
     {
         echo $id;
+    }
+
+    public function forgotPassword($token)
+    {
+        $title = 'Lấy lại mật khẩu';
+        $categoryChill = $this->category;
+        $category = $this->category->getCategoryParent();
+        return view('client.page.forgot-password', compact(
+            'title',
+            'category',
+            'categoryChill'
+        ));
+    }
+    public function forgot(Request $request)
+    {
+        $mailer = $request->input('email');
+        // dd($mailer);
+        // die;
+        $user = $this->users->getPasswordForEmail($mailer);
+        $pass = $user->password;
+
+
+        return redirect()->route('home')->with('success', 'Thành công !');
+
+        // return redirect()->route('home')->with('error',' Không thành công !');
+    }
+    public function testEmail(Request $request){
+        $email = $request->input('email');
+        Mail::to('dangvanthinh372004@gmail.com')->send(new MailRepassed('hihiihihihihi'));
     }
 
 

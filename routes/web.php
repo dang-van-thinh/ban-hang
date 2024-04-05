@@ -87,6 +87,9 @@ Route::get('order', [ClientController::class,'orderProduct'])->name('order');
 Route::post('store-order',[ClientController::class,'storeOrder'])->name('storeOrder');
 Route::get('ordered/{id}', [ClientController::class,'orderedProduct'])->name('ordered');
 Route::get('bill/{id}', [ClientController::class,'bill'])->name('bill');
+Route::get('forgot/{token}', [ClientController::class, 'forgotPassword'])->name('forgotPassword');
+Route::post('forgot-pw', [ClientController::class, 'forgot'])->name('forgot');
+Route::get('test-email', [ClientController::class, 'testEmail'])->name('testEmail');
 
 Route::prefix('profiles')->name('profiles.')->middleware('authen')->group(function(){
 Route::get('profile-infor',[ProfileController::class,'profile'])->name('profile');

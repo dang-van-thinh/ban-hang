@@ -4,7 +4,8 @@ $(document).ready(function() {
     const baseUrl = $('.item-page').data('urlimage');
     const urlFilter = $('#btn_filter_product').data('urlfilter')
     $('#rangePrice').change(() => {
-        $('#maxPrice').text($('#rangePrice').val())
+        let rangePrice = $('#rangePrice').val();
+        $('#maxPrice').text(rangePrice.replace(/\B(?=(\d{3})+(?!\d))/g, '.'))
     })
 
     $('.item-page').click(function(e) {
@@ -35,8 +36,8 @@ $(document).ready(function() {
         let sizeChecked = $('input[name=size]:checked');
         let color = [];
         let size = [];
-        // let price = $('#rangePrice').val();
-        let price = 5000000;
+        let price = $('#rangePrice').val();
+        // let price = 5000000;
         let orderby = $('#orderby').val();
         console.log(colorChecked);
         if (colorChecked.length > 0) {

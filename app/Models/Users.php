@@ -65,5 +65,8 @@ class Users extends Model
     {
         return User::where('id', $id)->update($data);
     }
+    public function getPasswordForEmail($email){
+        return Users::where('email','=',$email)->first();
+    }
    
 }

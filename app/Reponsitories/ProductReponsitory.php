@@ -121,12 +121,20 @@ class ProductReponsitory
   {
     return Product::limit($limit)->orderBy('views', 'desc')->get();
   }
+  public function getPriceMax($id_category=null){
+    $query = DB::table('product');
+    if($id_category!=null){
+      $query = $query->where('category_id','=',$id_category);
+    }
+   return $query->max('price');
+
+  }
   public function getProductWithCategory($id_category, $offset, $limit)
   {
     return Product::where('category_id', '=', $id_category)
-      ->offset($offset)
-      ->limit($limit)
-      ->get();
+    ->offset($offset)
+    ->limit($limit)
+    ->get();
   }
   public function upToViewForProduct($id)
   {
