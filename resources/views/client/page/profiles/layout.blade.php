@@ -6,19 +6,16 @@
                 <div class="bg-body-secondary">
                     <ul class="nav flex-column nav_profile">
                         <li class="nav-item">
-                          <a class="" href="#">Thông tin người dùng</a>
+                          <a class="" href="{{route('profiles.profile')}}">Thông tin người dùng</a>
                         </li>
                         <li class="nav-item">
-                          <a class="" href="#">Địa chỉ</a>
+                          <a class="" href="{{route('profiles.profile-bill')}}">Đơn hàng</a>
                         </li>
                         <li class="nav-item">
-                          <a class="" href="#">Đơn hàng</a>
+                          <a class=" " href="{{route('profiles.profile-setting')}}">Cài đặt tài khoản</a>
                         </li>
                         <li class="nav-item">
-                          <a class=" " href="#">Cài đặt tài khoản</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class=" " href="{{route('logout')}}">Đăng xuất</a>
+                            <a class="" onclick="return confirm('Bạn có chắc muốn đăng xuất ?')" href="{{route('logout')}}">Đăng xuất</a>
                           </li>
                       </ul>
                 </div>

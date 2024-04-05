@@ -175,7 +175,7 @@
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="" class="menu-link">
+                  <a href="{{route('admin.bill.index')}}" class="menu-link">
                     <div data-i18n="Account">Danh sách</div>
                   </a>
                 </li>

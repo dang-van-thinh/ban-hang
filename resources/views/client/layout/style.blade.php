@@ -9,3 +9,4 @@
 {{-- carousel  --}}
 <link rel="stylesheet" href="{{asset('js/carousel/owl.carousel.css')}}">
 <link rel="stylesheet" href="{{asset('js/carousel/owl.theme.default.css')}}">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>

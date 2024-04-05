@@ -5,13 +5,13 @@
             <div class="d-flex">
                 <img src="{{ asset('img/custom/default-facebook.png') }}" alt="" class="rounded" width="100px">
                 <div class="ms-3">
-                    <h5 class="fs-6">Tên người dùng</h5>
+                    <h5 class="fs-6"> {{$user->name}} </h5>
                     <div class="d-flex">
                         <p class="fw-medium">Email:</p>
-                        <span>dangvanthnh@gmail.com </span> ,
+                        <span class="ms-2">{{$user->email}} </span> ,
                         <p class="fw-medium ms-2">Điện thoại:</p>
-                        <span>0102382387</span>
-                        <a href="" class="ms-2 text-primary">
+                        <span class="ms-2"> {{$user->phone_number}} </span>
+                        <a href="{{route('profiles.profile-setting')}}" class="ms-2 text-primary">
                             <i class="far fa-edit"></i>
                         </a>
                     </div>

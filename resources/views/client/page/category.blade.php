@@ -29,7 +29,7 @@
                         </div>
                         <hr>
                         <div class="mt-3">
-                            <label for="rangePrice" class="form-label">Giá </label>
+                            <label for="rangePrice" class="form-label fw-bold">Giá </label>
                             <input type="range" name="rangePrice" class="form-range" min="0" max="1000"
                                 value="1000" id="rangePrice">
                             <div class="min-max-price">
@@ -41,7 +41,8 @@
                             </div>
                         </div>
                         <div class="mt-3">
-                            <button class="btn btn-primary" id="btn_filter_product" type="button">Lọc</button>
+                            <button class="btn btn-primary" data-urlfilter="{{route('ajaxProductFilter')}}"
+                             id="btn_filter_product" type="button">Lọc</button>
                         </div>
                     </div>
                 </div>
@@ -92,7 +93,7 @@
                                                 <img src="{{ asset($product->img) }}" alt="" class="text-center">
                                             </div>
                                             <div class=" des_product ps-3">
-                                                <h5 class="fw-medium text-secondary">{{ $product->name }}</h5>
+                                                <h5 class="fw-bold text-secondary text-uppercase">{{ $product->name }}</h5>
                                                 <p class="text-danger fw-bold">
                                                     {{ number_format($product->price, 0, ',', '.') }} <span>VNĐ</span></p>
                                             </div>
@@ -112,7 +113,7 @@
                                     </li>
                                     @for ($i = 1; $i <= $numberPage; $i++)
                                         <li class="page-item">
-                                            <a class="page-link item-page" data-orderby="{{ $products['orderBy'] }}"
+                                            <a class="page-link item-page" data-url="{{route('ajaxProductOffset')}}" data-urldetail="{{route('detailProduct')}}" data-urlimage="{{asset('')}}" data-orderby="{{ $products['orderBy'] }}"
                                                 data-category="{{ $products['category'] }}"
                                                 data-page="{{ $i }}" data-limit="12" href="#">
                                                 {{ $i }} </a>
@@ -132,143 +133,4 @@
             </div>
         </form>
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            $('#rangePrice').change(() => {
-                $('#maxPrice').text($('#rangePrice').val())
-            })
-
-
-            $('.item-page').click(function(e) {
-                e.preventDefault()
-                let _this = $(this);
-                let page = _this.data('page');
-                let limit = _this.data('limit');
-                let offsets = Number((page - 1) * limit);
-                let category = _this.data('category');
-                let orderBy = _this.data('orderby');
-                console.log(orderBy);
-                itemForPage(offsets, limit, category, orderBy);
-            });
-
-            function itemForPage(offset, limit, category, orderBy) {
-                let data = {
-                    offset: offset,
-                    limit: limit,
-                    category: category,
-                    orderBy: orderBy
-                };
-                let html = '';
-                $.ajax({
-                    type: "GET",
-                    url: "{{ route('ajaxProductOffset') }}",
-                    data: data,
-                    dataType: "json",
-                    success: function(response) {
-                        console.log(response);
-                        let html = '';
-                        response.products.forEach(el => {
-                            let price = el.price.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-                            html += `
-                            <div class="col-lg-3 col-md-6 col-sm-6 col-6 mt-3">
-                                    <div class="product">
-                                        <a href="{{ asset('detail-product/${el.id}') }}">
-                                            <div class="image_product ">
-                                                <img src="{{ asset('${el.img}') }}" alt="" class="text-center">
-                                            </div>
-                                            <div class=" des_product ps-3">
-                                                <h5 class="fw-medium text-secondary">${el.name}</h5>
-                                                <p class="text-danger fw-bold">
-                                                    ${price} <span>VNĐ</span></p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            `;
-                        });
-                        $('#show_product').html(html)
-                    },
-                    error: function(er) {
-                        console.log('sai');
-                    }
-                });
-            }
-            $('#orderby').change(function() {
-                // e.preventDefault()
-                filterProduct();
-            });
-            $('#btn_filter_product').click(function(e){
-                e.preventDefault();
-                filterProduct();
-            })
-
-            function filterProduct() {
-                let category = $('#methodCategory').data('category');
-                let colorChecked = $('input[name=color]:checked');
-                let sizeChecked = $('input[name=size]:checked');
-                let color = [];
-                let size = [];
-                // let price = $('#rangePrice').val();
-                let price = 5000000;
-                let orderby = $('#orderby').val();
-                console.log(colorChecked);
-                if (colorChecked.length > 0) {
-                    for (const item of colorChecked) {
-                        color.push(item.value);
-                    }
-                } else {
-                    color = null;
-                }
-
-                if (sizeChecked.length > 0) {
-                    for (const item of sizeChecked) {
-                        size.push(item.value);
-                    }
-                } else {
-                    size = null;
-                }
-
-                let data = {
-                    color: color,
-                    size: size,
-                    price: price,
-                    orderby: orderby,
-                    category: category
-                }
-                $.ajax({
-                    type: "GET",
-                    url: "{{ route('ajaxProductFilter') }}",
-                    data: data,
-                    dataType: "json",
-                    success: function(res) {
-                        console.log(res.products);
-                        let html = '';
-                        res.products.forEach(el => {
-                            let price = el.price.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-                            html += `
-                            <div class="col-lg-3 col-md-6 col-sm-6 col-6 mt-3">
-                                    <div class="product">
-                                        <a href="{{ asset('detail-product/${el.id}') }}">
-                                            <div class="image_product ">
-                                                <img src="{{ asset('${el.img}') }}" alt="" class="text-center">
-                                            </div>
-                                            <div class=" des_product ps-3">
-                                                <h5 class="fw-medium text-secondary">${el.name}</h5>
-                                                <p class="text-danger fw-bold">
-                                                    ${price} <span>VNĐ</span></p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            `;
-                        });
-                        $('#show_product').html(html)
-                    }
-                });
-            }
-        });
-    </script>
 @endsection

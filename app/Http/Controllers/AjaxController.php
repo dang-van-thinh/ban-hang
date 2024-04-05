@@ -62,7 +62,8 @@ class AjaxController extends Controller
         return response()->json($data);
     }
     public function allProductOffset(Request $request){
-        
+        // dd($request->all());
+        // die;
         $offset = $request->input('offset');
         $limit = $request->input('limit');
         $category = $request->input('category');
@@ -71,13 +72,11 @@ class AjaxController extends Controller
             // dd($products);
             // die;
             $data = [
-                'products'=>$products
+                'products'=>$products,
             ];
         return response()->json($data);
     }
     public function productFilter(Request $request){
-        // dd($request->all());
-        
         $color = $request->input('color');
         $size = $request->input('size');
         $price = $request->input('price');
@@ -85,8 +84,6 @@ class AjaxController extends Controller
         $category = $request->input('category');
         
         $product = $this->productReponsitories->filterProduct($color,$size,$price,$orderBy,$category);
-        // dd($product);
-        // die;
         $data = [
             'products'=>$product
         ];

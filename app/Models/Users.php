@@ -65,4 +65,5 @@ class Users extends Model
     {
         return User::where('id', $id)->update($data);
     }
+   
 }

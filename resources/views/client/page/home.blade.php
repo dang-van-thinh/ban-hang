@@ -75,62 +75,64 @@
                 <h4 class="my-5 text-uppercase fw-bold">Sản phẩm mới nhất</h4>
                 <div class="row">
                     @foreach ($productsNew as $product)
-                        
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-3">
-                        <div class="product">
-                            <a href="{{route('detailProduct',$product->id)}}">
-                                <div class="image_product ">
-                                    <img src="{{ asset($product->img) }}" alt=""
-                                    class="text-center">
-                                </div>
-                                <div class="des_product ps-3">
-                                    <h5 class="fw-medium text-secondary">{{$product->name}}</h5>
-                                    <p class="text-danger fw-bold">{{number_format($product->price, 0, ',', '.')}} <span>VNĐ</span></p>
-                                </div>
-                            </a>
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-3">
+                            <div class="product">
+                                <a href="{{ route('detailProduct', $product->id) }}">
+                                    <div class="image_product ">
+                                        <img src="{{ asset($product->img) }}" alt="" class="text-center">
+                                    </div>
+                                    <div class="des_product ps-3">
+                                        <h5 class="fw-bold text-secondary text-uppercase">{{ $product->name }}</h5>
+                                        <p class="text-danger fw-bold">{{ number_format($product->price, 0, ',', '.') }}
+                                            <span>VNĐ</span></p>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                    </div>
                     @endforeach
-                    
+
                 </div>
             </div>
             {{-- banner  --}}
             <div class="mt-5 container">
                 <div class=" banner">
                     <a href="">
-                        <img src="{{asset('img/custom/bst1.webp')}}" alt="" class="">
+                        <img src="{{ asset('img/custom/bst1.webp') }}" alt="" class="">
                     </a>
                 </div>
                 <div class="row banner_chils mt-5 p-3">
                     <div class="col-lg-4 banner_chil">
-                        <img src="{{asset('img/custom/bst2.webp')}}" alt="">
+                        <img src="{{ asset('img/custom/bst2.webp') }}" alt="">
                     </div>
                     <div class="col-lg-4 banner_chil">
-                        <img src="{{asset('img/custom/bst2.webp')}}" alt="">
+                        <img src="{{ asset('img/custom/bst2.webp') }}" alt="">
                     </div>
                     <div class="col-lg-4 banner_chil">
-                        <img src="{{asset('img/custom/bst2.webp')}}" alt="">
+                        <img src="{{ asset('img/custom/bst2.webp') }}" alt="">
                     </div>
                 </div>
             </div>
             <div class="mt-5">
                 <h5 class="text-uppercase fw-bold my-5">Đồ thể thao</h5>
                 <div class="row">
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-3">
-                        <div class="product">
-                            <a href="{{route('detailProduct',$product->id)}}">
-                                <div class="image_product ">
-                                    <img src="{{ asset($product->img) }}" alt=""
-                                    class="text-center">
-                                </div>
-                                <div class="mt-2 des_product ps-3">
-                                    <h5 class="fw-medium text-secondary">{{$product->name}}</h5>
-                                    <p class="text-danger fw-bold">{{number_format($product->price, 0, ',', '.')}} <span>VNĐ</span></p>
-                                </div>
-                            </a>
+                    {{-- @foreach ($productSport as $item)
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-3">
+                            <div class="product">
+                                <a href="{{ route('detailProduct', $product->id) }}">
+                                    <div class="image_product ">
+                                        <img src="{{ asset($product->img) }}" alt="" class="text-center">
+                                    </div>
+                                    <div class="mt-2 des_product ps-3">
+                                        <h5 class="fw-medium text-secondary">{{ $product->name }}</h5>
+                                        <p class="text-danger fw-bold">{{ number_format($product->price, 0, ',', '.') }}
+                                            <span>VNĐ</span></p>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    
+                    @endforeach --}}
+
+
                 </div>
                 <div class="mt-5">
                     <div class="text-center">
@@ -143,26 +145,26 @@
                 <h5 class="text-uppercase fw-bold my-5">Sản phẩm nhiều lượt xem nhất</h5>
                 <div class="row">
                     @foreach ($productByView as $productView)
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-3">
-                        <div class="product">
-                            <a href="{{route('detailProduct',$productView->id)}}">
-                                <div class="image_product ">
-                                    <img src="{{ asset($productView->img) }}" alt=""
-                                    class="text-center">
-                                </div>
-                                <div class="mt-2 des_product ps-3">
-                                    <h5 class="fw-medium text-secondary">{{$productView->name}}</h5>
-                                    <p class="text-danger fw-bold">{{number_format($productView->price, 0, ',', '.')}} <span>VNĐ</span></p>
-                                </div>
-                            </a>
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-3">
+                            <div class="product">
+                                <a href="{{ route('detailProduct', $productView->id) }}">
+                                    <div class="image_product ">
+                                        <img src="{{ asset($productView->img) }}" alt="" class="text-center">
+                                    </div>
+                                    <div class="mt-2 des_product ps-3">
+                                        <h5 class="fw-bold text-secondary text-uppercase">{{ $productView->name }}</h5>
+                                        <p class="text-danger fw-bold">
+                                            {{ number_format($productView->price, 0, ',', '.') }} <span>VNĐ</span></p>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                    </div>
                     @endforeach
-                    
+
                 </div>
                 <div class="mt-5">
                     <div class="text-center">
-                        <a href="{{route('view',null)}}" class="btn btn-outline-danger">Xem thêm...</a>
+                        <a href="{{ route('view', null) }}" class="btn btn-outline-danger">Xem thêm...</a>
                     </div>
                 </div>
             </div>

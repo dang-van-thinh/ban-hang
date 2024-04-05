@@ -1,6 +1,6 @@
-<script src="{{asset('js/boostrap.min.js')}}"></script>
-<script src="{{asset('js/custom.js')}}"></script>
- <!-- jQuery -->
+<script src="{{ asset('js/boostrap.min.js') }}"></script>
+<script src="{{ asset('js/custom.js') }}"></script>
+<!-- jQuery -->
 {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
 {{--
 <!-- Bootstrap JS -->
@@ -10,13 +10,18 @@
 
 {{-- carousel --}}
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="{{asset('js/carousel/owl.carousel.js')}}"></script>
+<script src="{{ asset('js/carousel/owl.carousel.js') }}"></script>
+@isset($script)
+    @foreach ($script as $item)
+       <script src="{{asset($item)}}"></script>
+    @endforeach
+@endisset
 
 <script>
     var arrCart = [];
-            var itemLocal = localStorage.getItem('product');
-            if (itemLocal) {
-                arrCart = JSON.parse(itemLocal);
-            }
-            $('#numberCart').text(arrCart.length);
+    var itemLocal = localStorage.getItem('product');
+    if (itemLocal) {
+        arrCart = JSON.parse(itemLocal);
+    }
+    $('#numberCart').text(arrCart.length);
 </script>

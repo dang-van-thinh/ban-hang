@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\AttributeController;
+use App\Http\Controllers\BillController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\LoginCotronller;
@@ -28,6 +29,7 @@ use Illuminate\Support\Facades\Route;
 // route product admin
 Route::prefix('admin')->name('admin.')->middleware('authen')->group(function () {
     Route::get('/', [ProductController::class, 'dashboard'])->name('dashboard')->middleware('role.admin');
+    //product 
     Route::prefix('product')->name('product.')->middleware('role.admin')->group(function () {
         Route::get('list/{page?}', [ProductController::class, 'index'])->name('index');
         Route::get('create', [ProductController::class, 'create'])->name('create');
@@ -66,6 +68,10 @@ Route::prefix('admin')->name('admin.')->middleware('authen')->group(function () 
         Route::get('del/{id}',[AttributeController::class,'delColor'])->name('delColor');
         Route::get('del/{id}',[AttributeController::class,'delSize'])->name('delSize');
     });
+    //bill
+    Route::prefix('bill')->name('bill.')->group(function(){
+        Route::get('list/{page?}',[BillController::class,'index'])->name('index');
+    });
 });
 
 // route người dùng->middleware('role')
@@ -75,7 +81,7 @@ Route::prefix('page')->name('client.')->group(function () {
 Route::get('/', [ClientController::class,'home'])->name('home');
 Route::get('category/{id_category?}', [ClientController::class,'category'])->name('category');
 Route::get('category-view',[ClientController::class,'view'])->name('view');
-Route::get('detail-product/{id_product}', [ClientController::class,'detailProduct'])->name('detailProduct');
+Route::get('detail-product/{id_product?}', [ClientController::class,'detailProduct'])->name('detailProduct');
 Route::get('cart', [ClientController::class,'cartProduct'])->name('cart');
 Route::get('order', [ClientController::class,'orderProduct'])->name('order');
 Route::post('store-order',[ClientController::class,'storeOrder'])->name('storeOrder');
@@ -84,6 +90,10 @@ Route::get('bill/{id}', [ClientController::class,'bill'])->name('bill');
 
 Route::prefix('profiles')->name('profiles.')->middleware('authen')->group(function(){
 Route::get('profile-infor',[ProfileController::class,'profile'])->name('profile');
+Route::get('profile-bill',[ProfileController::class,'profileBill'])->name('profile-bill');
+Route::get('profile-setting',[ProfileController::class,'profileSetting'])->name('profile-setting');
+Route::post('profile-delete-account/{id}',[ProfileController::class,'deleteAccount'])->name('profileDeleteAccount');
+
 });
 
 

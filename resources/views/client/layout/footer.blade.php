@@ -39,11 +39,14 @@
                 <h4 class="text-uppercase fs-5 fw-bold">menu</h4>
                 <ul class="nav flex-column mt-5">
                     <li class=" nav-link">
-                        <a href="" class="text-light fw-bold text-uppercase">Trang chủ</a>
+                        <a href="" class="text-light fw-medium text-uppercase">Trang chủ</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="">ytrang ch</a>
+                    @foreach ($category as $item)
+                    <li class=" nav-link">
+                        <a href="" class="text-light fw-medium text-uppercase">{{ $item->name }}</a>
                     </li>
+                    @endforeach
+                    
                 </ul>
             </div>
             <div class="col-lg-2 col-2">

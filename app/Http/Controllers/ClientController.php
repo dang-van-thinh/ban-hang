@@ -91,6 +91,9 @@ class ClientController extends Controller
             'orderBy'=>'views',
             'category'=>0
         ];
+        $script = [
+            'js/client/libs/category.js'
+        ];
         $color = $this->color->getAllColor();
         $size = $this->size->getAllSize();
         $category = $this->category->getCategoryParent();
@@ -102,7 +105,8 @@ class ClientController extends Controller
             'color',
             'size',
             'category',
-            'categoryChill'
+            'categoryChill',
+            'script'
         ));
     }
     public function category($id_category=null)
@@ -131,6 +135,9 @@ class ClientController extends Controller
         }
         $numberPage = ceil($countProduct / $limit);
         $title = 'Sản phẩm';
+        $script = [
+            'js/client/libs/category.js'
+        ];
         $categoryChill = $this->category;
         $category = $this->category->getCategoryParent();
         $color = $this->color->getAllColor();
@@ -143,7 +150,8 @@ class ClientController extends Controller
             'size',
             'category',
             'categoryChill',
-            'numberPage'
+            'numberPage',
+            'script'
         ]));
     }
     public function detailProduct($id_product)
@@ -154,6 +162,9 @@ class ClientController extends Controller
         $product = $this->productReponsitory->getOneProduct($id_product);
         $getSize = $this->size;
         $getColor = $this->color;
+        $script = [
+            'js/client/libs/detailProduct.js'
+        ];
         $this->productReponsitory->upToViewForProduct($product[0]->id);
         $categoryProduct = $this->productReponsitory->getProductForCategory($product[0]->category_id, $product[0]->id);
         // dd($categoryProduct);
@@ -165,18 +176,23 @@ class ClientController extends Controller
             'product',
             'getSize',
             'getColor',
-            'categoryProduct'
+            'categoryProduct',
+            'script'
         ));
     }
     public function cartProduct()
     {
         $title = 'Giỏ hàng';
+        $script = [
+            'js/client/libs/cart.js'
+        ];
         $categoryChill = $this->category;
         $category = $this->category->getCategoryParent();
         return view('client.page.cart', compact(
             'title',
             'category',
-            'categoryChill'
+            'categoryChill',
+            'script'
         ));
     }
     // hiển thị trang order
@@ -187,6 +203,9 @@ class ClientController extends Controller
         $size = $request->input('size');
         $color = $request->input('color');
         $quanity = $request->input('quanity');
+        $script = [
+            'js/client/libs/order.js'
+        ];
         // $productBill = [];
         for ($i = 0; $i < count($id); $i++) {
             $productBill[] = [
@@ -236,7 +255,8 @@ class ClientController extends Controller
             'category',
             'categoryChill',
             'provinces',
-            'users'
+            'users',
+            'script'
         ));
     }
     public function storeOrder(OrderRequest $request)

@@ -1,16 +1,17 @@
+:root{
+    --background-white : #ffff;
+    --text-black : #000000;
+    --background-black : #020123;
+    --text-white : #ffffff;
+}
 *{
     margin: 0;
     box-sizing: border-box;
-    font-family: 'JetBrains Mono',Courier ;
+    /* font-family: 'JetBrains Mono',Courier ; */
     font-size: 15px;
-    word-wrap: break-word
+    word-wrap: break-word;
 }
-:root{
-    --background-white : #ffff;
-    --text-color : #000000aa;
-    --background-black : #000000;
-    --text-color : #ffffff;
-}
+
 a {
     text-decoration: none;
 }
@@ -116,7 +117,7 @@ header{
     object-fit: cover;
     /* border: 0.5px solid rgb(191, 189, 189); */
     border-radius: 5px;
-    
+    margin-bottom: 0.5rem;
 }
 .product img{
     width: 100%;
@@ -204,7 +205,8 @@ transform: translate(-175px,10px);
     overflow: hidden;
 }
 .product_image_detail{
-    position: sticky;
+    position: sticky;   
+    height: 513px;
     top: 87px;
 }
 .color_item{
@@ -270,13 +272,17 @@ transform: translate(-175px,10px);
     width: 100%;
     padding: 10px 0;
     font-size: 17px;
-    background-color: red;
-    color: aliceblue;
+    background-color: rgb(230, 39, 39);
+    color: rgb(227, 227, 227);
     border: 1px solid rgb(208, 208, 208);
     transition: all 0.3s;
 }
 .btn_add_cart:hover{
-    transform: scale(1.015);
+    /* transform: scale(1.015); */
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px gray;
+    background-color: rgb(218, 15, 15);
+    color: rgb(227, 227, 227);
 }
 .icon_service{
     width: 40px;

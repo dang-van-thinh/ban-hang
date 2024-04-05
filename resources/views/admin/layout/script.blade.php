@@ -34,3 +34,9 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    @isset($script)
+        @foreach ($script as $item)
+            <script src="{{asset($item)}}"></script>
+        @endforeach
+    @endisset
