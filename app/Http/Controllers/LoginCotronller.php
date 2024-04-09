@@ -17,12 +17,10 @@ class LoginCotronller extends Controller
     protected $users;
     protected $time;
     protected $timezone;
-    protected $mail;
     public function __construct(){
         $this->users = new Users();
         $this->time = new DateTime();
         $this->timezone = new DateTimeZone('Asia/Ho_Chi_Minh');
-        $this->mail = new EmailController();
     }
     //
     public function index(){

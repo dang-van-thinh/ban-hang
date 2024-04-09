@@ -1,2 +1,2 @@
-<h3>Chào </h3>
-{{$name}}
+<h3>Chào {{$email}} </h3>
+<p>Đây là mật khẩu của bạn : {{$password}} </p>

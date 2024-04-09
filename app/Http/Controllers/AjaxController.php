@@ -82,13 +82,22 @@ class AjaxController extends Controller
         $price = $request->input('price');
         $orderBy = $request->input('orderby');
         $category = $request->input('category');
+        $key = $request->input('key');
         
-        $product = $this->productReponsitories->filterProduct($color,$size,$price,$orderBy,$category);
+        $product = $this->productReponsitories->filterProduct($color,$size,$price,$orderBy,$category,$key);
         $data = [
             'products'=>$product
         ];
         return response()->json($data);
     }
+    public function search(Request $request){
+        $key = $request->input('key');
+        $product = $this->productReponsitories->getProductBySearch($key);
+        $data = [
+            'product'=>$product
+        ];
+        return response()->json($data);
+    } 
 
 
     // function test API 

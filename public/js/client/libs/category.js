@@ -34,12 +34,13 @@ $(document).ready(function() {
         let category = $('#methodCategory').data('category');
         let colorChecked = $('input[name=color]:checked');
         let sizeChecked = $('input[name=size]:checked');
+        let key = $('#key-search').data('key');
         let color = [];
         let size = [];
         let price = $('#rangePrice').val();
         // let price = 5000000;
         let orderby = $('#orderby').val();
-        console.log(colorChecked);
+        // console.log(colorChecked);
         if (colorChecked.length > 0) {
             for (const item of colorChecked) {
                 color.push(item.value);
@@ -61,7 +62,8 @@ $(document).ready(function() {
             size: size,
             price: price,
             orderby: orderby,
-            category: category
+            category: category,
+            key:key
         }
         $.ajax({
             type: "post",

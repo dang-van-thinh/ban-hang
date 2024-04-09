@@ -8,8 +8,8 @@ if (cartLocal) {
 $('#numberCart').text(carts.length);
 
 
-
-function showAndHideTableCart() {
+function showAndHideTableCart(e) {
+    
     if (carts.length < 1) {
         $('#no_cart').show();
         $('#table_cart').hide();

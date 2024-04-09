@@ -17,11 +17,13 @@ class MailRepassed extends Mailable
     /**
      * Create a new message instance.
      */
-    protected $name;
-    public function __construct($name)
+    protected $email;
+    protected $password;
+    public function __construct($email,$password)
     {   
         // nhận dữ liệu
-        $this->name = $name;
+        $this->email = $email;
+        $this->password = $password;
     }
 
     /**
@@ -43,7 +45,10 @@ class MailRepassed extends Mailable
         // compact dữ liệu đến trang views để sử dụng
         return new Content(
             view: 'client.page.emails.test',
-            with:['name'=>$this->name]
+            with:[
+                'email'=>$this->email,
+                'password'=>$this->password
+                ]
         );
     }
 

@@ -481,3 +481,26 @@ transform: translate(-175px,10px);
     transform: scale(0.95);
     box-shadow: inset 5px 5px 10px gray;
   }
+  .media{
+    width: 28%;
+    height: 100%;
+    margin: 16px 0;
+    position: absolute;
+    top: 3rem;
+  }
+  .search-show{
+    height: 58px;
+    width: 100%;
+  }
+  .item-media{
+    width: 90%;
+  }
+  .item-media img{
+    width: 50px;
+  }
+  .item-media a{
+    /* border: 1px solid gray; */
+    padding: 10px 10px;
+    background-color: ghostwhite;
+    border-bottom: 1px solid gray;
+  }

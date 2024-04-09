@@ -38,15 +38,28 @@
 
                 </ul>
                 <div class="d-flex">
-                    <form class="me-3" role="search">
+                    <form class="me-3" action="{{ route('search') }}" id="form_search" method="GET">
                         <div class="input-group">
-                            <input class="form-control fw-medium" type="search" placeholder="Tìm kiếm"
-                                aria-label="Search">
+                            <input class="form-control fw-medium" type="search" name="key" id="key"
+                                placeholder="Tìm kiếm" aria-label="Search" data-url="{{ route('ajaxSearch') }}">
                             <button class="btn btn-outline-primary" type="submit"><i
                                     class="fas fa-search"></i></button>
                         </div>
-
                     </form>
+                    <div class="media">
+                        <div class="search-show"
+                        data-urlimg="{{asset('')}}"
+                        data-urlsearch="{{route('search')}}"
+                         data-url="{{route('detailProduct')}}">  
+                         {{-- hiển thị danh sách sản phẩm tìm kiếm --}}
+                         <div class="show-search">
+
+                         </div>
+                         <div class="text-center show-more-media">
+                             
+                          </div>
+                        </div>
+                    </div>
                     <div class="d-flex">
                         <ul class="nav me-5 ">
                             @if (Auth::check())
@@ -70,8 +83,7 @@
                                 </li>
                             @else
                                 <li class="nav-item">
-                                    <button class="btn text-secondary btn_overplay" 
-                                        data-overplay-target="#formLogin">
+                                    <button class="btn text-secondary btn_overplay" data-overplay-target="#formLogin">
                                         <i class="fas fa-user"></i>
                                     </button>
                                     @include('signin.login')

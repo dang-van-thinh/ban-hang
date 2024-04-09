@@ -8,23 +8,25 @@
             <h5 class="text-center mb-4 fw-bold">Đăng nhập</h5>
             <div class="mb-3">
                 <label for="email" class="form-label fw-medium">Email</label>
-                <input type="text" name="email" id="email" placeholder="Nhập email" class="form-control"
+                <input type="email" name="email" id="email" placeholder="Nhập email" class="form-control"
                     value="{{ old('email') }}">
-                @if ($errors->has('email'))
-                    <i class="badge text-danger">
+               
+                    <i class="badge text-danger" id="erEmail">
+                        @if ($errors->has('email'))
                         *{{ $errors->first('email') }}
+                        @endif
                     </i>
-                @endif
+               
             </div>
             <div class="mb-3">
                 <label for="pw" class="form-label fw-medium">Mật khẩu</label>
                 <input type="password" name="pw" id="pw" placeholder="Nhập mật khẩu" class="form-control"
                     value="{{ old('pw') }}">
-                @if ($errors->has('pw'))
-                    <i class="badge text-danger">
+                    <i class="badge text-danger" id="erPW">
+                        @if ($errors->has('pw'))
                         *{{ $errors->first('pw') }}
+                        @endif
                     </i>
-                @endif
             </div>
             <div class="mb-3">
                 <div class="group-input">
@@ -36,8 +38,11 @@
                 <a id="forgotPassword" href="{{route('forgotPassword',csrf_token())}}">Quên mật khẩu ?</a>
             </div>
             <div class="mt-5 text-center">
-                <input type="submit" value="Đăng nhập" class="btn fw-medium btn-info w-50">
+                <input type="submit" id="login" value="Đăng nhập" class="btn fw-medium btn-info w-50">
             </div>
         </form>
     </div>
+    <script>
+        
+    </script>
 </div>

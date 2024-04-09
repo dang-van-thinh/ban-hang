@@ -65,7 +65,6 @@ class ClientController extends Controller
         $categoryChill = $this->category;
         $productsNew = $this->productReponsitory->getProductsNewLimit();
         $productByView = $this->productReponsitory->getProductByViewLimit();
-
         $category = $this->category->getCategoryParent();
         // dd($productByView);
         // die;
@@ -78,6 +77,47 @@ class ClientController extends Controller
 
         ]));
     }
+    public function search(Request $request){
+        
+        $key = $request->input('key');
+        $title = "Tìm kiếm : $key ";
+        $curentPage = 1;
+        $limit = 12;
+        $categoryChill = $this->category;
+        $category = $this->category->getCategoryParent();
+        $product = $this->productReponsitory->getProductBySearch($key);
+        $color = $this->color->getAllColor();
+        $size = $this->size->getAllSize();
+        // dd($product->pluck('id')->toArray());
+        // die;
+        $numberPage = ceil(count($product)/$limit);
+
+        $priceMax = $this->productReponsitory->getPriceMax(null,$product->pluck('id')->toArray());
+        $priceMin = $this->productReponsitory->getPriceMin(null,$product->pluck('id')->toArray());
+// dd($priceMax);
+// die;
+        $products = [
+            'products'=>$product,
+            'orderBy'=>null,
+            'category'=>0,
+            'priceMax'=>$priceMax,
+            'priceMin'=>$priceMin
+        ];
+        $script = [
+            'js/client/libs/category.js'
+        ];
+        return view('client.page.category',compact(
+            'title',
+            'category',
+            'categoryChill',
+            'products',
+            'color',
+            'size',
+            'numberPage',
+            'key',
+            'script'
+        ));
+    }
     public function view()
     {
         $title = 'Sản phẩm có nhiều lượt xem nhất';
@@ -88,10 +128,15 @@ class ClientController extends Controller
         $product = $this->productReponsitory->getAllProduct($curentPage, $limit, null, 0);
         // dd($products);
         // die;
+        $priceMax = $this->productReponsitory->getPriceMax();
+        $priceMin = $this->productReponsitory->getPriceMin();
+
         $products = [
             'products' => $product,
             'orderBy' => 'views',
-            'category' => 0
+            'category' => 0,
+            'priceMax'=>$priceMax,
+            'priceMin'=>$priceMin
         ];
         $script = [
             'js/client/libs/category.js'
@@ -119,11 +164,13 @@ class ClientController extends Controller
         if ($id_category) {
             $product = $this->productReponsitory->getProductWithCategory($id_category, $offset, $limit);
             $priceMax = $this->productReponsitory->getPriceMax($id_category);
+            $priceMin = $this->productReponsitory->getPriceMin($id_category);
             $products = [
                 'products' => $product,
                 'category' => $id_category,
                 'orderBy' => null,
-                'priceMax' => $priceMax
+                'priceMax' => $priceMax,
+                'priceMin' => $priceMin
             ];
             $countProduct = $this->productReponsitory->countProduct($id_category);
         } else {
@@ -380,12 +427,13 @@ class ClientController extends Controller
     }
     public function forgot(Request $request)
     {
-        $mailer = $request->input('email');
+        $email = $request->input('email');
         // dd($mailer);
         // die;
-        $user = $this->users->getPasswordForEmail($mailer);
+        $user = $this->users->getPasswordForEmail($email);
         $pass = $user->password;
 
+        Mail::to($email)->send(new MailRepassed($email,$pass));
 
         return redirect()->route('home')->with('success', 'Thành công !');
 
@@ -393,7 +441,7 @@ class ClientController extends Controller
     }
     public function testEmail(Request $request){
         $email = $request->input('email');
-        Mail::to('dangvanthinh372004@gmail.com')->send(new MailRepassed('hihiihihihihi'));
+        // Mail::to('dangvanthinh372004@gmail.com')->send(new MailRepassed($email,$pass));
     }
 
 

@@ -79,6 +79,7 @@ Route::prefix('page')->name('client.')->group(function () {
     Route::get('product/{id_category}',[ClientController::class,'product'])->name('product');
 });
 Route::get('/', [ClientController::class,'home'])->name('home');
+Route::get('search/{key?}', [ClientController::class,'search'])->name('search');
 Route::get('category/{id_category?}', [ClientController::class,'category'])->name('category');
 Route::get('category-view',[ClientController::class,'view'])->name('view');
 Route::get('detail-product/{id_product?}', [ClientController::class,'detailProduct'])->name('detailProduct');

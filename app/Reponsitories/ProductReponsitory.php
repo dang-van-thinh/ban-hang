@@ -74,7 +74,7 @@ class ProductReponsitory
       ->where('id', '!=', $id)
       ->get();
   }
-  public function filterProduct($color=null, $size = null, $price = null, $orderby, $category=0)
+  public function filterProduct($color=null, $size = null, $price = null, $orderby, $category=0,$key=null)
   {
     $product = Product::join('quanity as q', 'q.product_id', '=', 'product.id')
       ->join('color', 'color.id', '=', 'q.id_color')
@@ -90,6 +90,9 @@ class ProductReponsitory
     }
     if ($price) {
       $product = $product->whereBetween('product.price',[0,$price]);
+    }
+    if ($key) {
+      $product = $product->where('product.name','like','%'.$key.'%');
     }
     $product = $product->groupBy('product.id', 'product.name', 'product.img', 'product.price')
       ->select('product.id', 'product.name', 'product.img', 'product.price');
@@ -121,12 +124,26 @@ class ProductReponsitory
   {
     return Product::limit($limit)->orderBy('views', 'desc')->get();
   }
-  public function getPriceMax($id_category=null){
+  public function getPriceMax($id_category=null,$id_product=null){
     $query = DB::table('product');
     if($id_category!=null){
       $query = $query->where('category_id','=',$id_category);
     }
+    if($id_product != null){
+      $query = $query->whereIn('id',$id_product);
+    }
    return $query->max('price');
+
+  }
+  public function getPriceMin($id_category=null,$id_product=null){
+    $query = DB::table('product');
+    if($id_category!=null){
+      $query = $query->where('category_id','=',$id_category);
+    }
+    if($id_product != null){
+      $query = $query->whereIn('id',$id_product);
+    }
+   return $query->min('price');
 
   }
   public function getProductWithCategory($id_category, $offset, $limit)
@@ -134,6 +151,10 @@ class ProductReponsitory
     return Product::where('category_id', '=', $id_category)
     ->offset($offset)
     ->limit($limit)
+    ->get();
+  }
+  public function getProductBySearch($key){
+    return Product::where('name','like','%'.$key.'%')
     ->get();
   }
   public function upToViewForProduct($id)

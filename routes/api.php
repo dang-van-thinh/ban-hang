@@ -25,5 +25,6 @@ Route::post('ajax-wards',[AjaxController::class,'findWardsForDistrict'])->name('
 Route::post('ajax-product-limit',[AjaxController::class,'allProductOffset'])->name('ajaxProductOffset');
 Route::post('ajax-product-filter',[AjaxController::class,'productFilter'])->name('ajaxProductFilter'); 
 Route::post('detail',[BillController::class,'detailBill'])->name('ajaxDetail');
+Route::post('search',[AjaxController::class,'search'])->name('ajaxSearch');
 
 // Route::get('test',[AjaxController::class,'testController'])->name('test');
