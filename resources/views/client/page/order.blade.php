@@ -135,17 +135,21 @@
                                 <div class="card mt-3">
                                     <div class="card-header p-3">
                                         <div class="form-check mb-3">
-                                            <input checked type="radio" class="form-check-input" value="1"
-                                                name="pay">
-                                            <label for="" class="form-check-label">Thanh toán khi nhận hàng
+                                            <input checked type="radio" class="form-check-input pay" value="1"
+                                                name="pay" id="pay_1">
+                                            <label for="pay_1" class="form-check-label">Thanh toán khi nhận hàng
                                                 (COD)</label>
                                         </div>
                                         <div class="form-check mb-3">
-                                            <input type="radio" class="form-check-input" name="pay"
-                                                value="2">
-                                            <label for="" class="form-check-label">Thanh toán MOMO</label>
-                                            <img src="{{ asset('img/custom/MoMo_Logo.png') }}" alt=""
-                                                width="30px">
+                                                <input type="radio" class="form-check-input pay" name="pay"
+                                                    value="2" id="pay_2">
+                                                <label for="pay_2" class="form-check-label">Thanh toán MOMO</label>
+                                                <img src="{{ asset('img/custom/MoMo_Logo.png') }}" alt=""
+                                                    width="30px">
+                                                    <a href="{{route('paymomo')}}" 
+                                                    id="2" 
+                                                    style="display:none" 
+                                                    class="ms-2 btn btn-warning">Thanh toán</a>
                                         </div>
                                     </div>
                                 </div>

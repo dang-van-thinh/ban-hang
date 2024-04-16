@@ -52,7 +52,7 @@ $(document).ready(function () {
          $('#erPW').text('*Không được để trống mật khẩu');
          checkPassword = false;
       } else {
-         if (pw.length <= 8) {
+         if (pw.length < 8) {
             $('#erPW').text('Mật khẩu phải lớn hơn 8 ký tự');
             checkPassword = false;
          } else {
@@ -65,16 +65,30 @@ $(document).ready(function () {
       }
    })
 
-   // search product with ajax
-   $('#key').keydown(function () {
-      
-      setTimeout(() => {
-         let _this = $(this);
-      let key = _this.val();
-      let url = _this.data('url');
+
+   $('#key').on('focus',function () {
+      let _this = $(this);
+         let key = _this.val();
+         let url = _this.data('url');
          search(key, url);
-      }, 2000);
+         $('.media').show()
+      $('#key').on('keypress keydown',function () {
+         let _this = $(this);
+         let key = _this.val();
+         let url = _this.data('url');
+         search(key, url);
+         $('.media').show()
+      })
    })
+
+   $(document).on('click', function(event) {
+      if (!$(event.target).is('#key')) {
+        // $('.show-search').html('');
+        // $('.show-more-media').html('');
+        $('.media').hide();
+      }
+    });
+
    // function search 
    function search(key, url) {
       const urlDirect = $('.search-show').data('url')
@@ -89,10 +103,10 @@ $(document).ready(function () {
          data: data,
          dataType: "json",
          success: function (res) {
-            console.log(res.product);
+            console.log(res.product.length);
             let products = res.product
             let html = '';
-              for (let i = 0; i < (products.length); i++) {
+            for (let i = 0; i < (products.length); i++) {
                let linkDirect = urlDirect + '/' + products[i].id;
                let linkImg = urlImg + products[i].img;
                html += `
@@ -106,7 +120,7 @@ $(document).ready(function () {
                </div>
                
                `;
-              }
+            }
             // res.product.forEach(el => {
             //    let linkDirect = urlDirect + '/' + el.id;
             //    let linkImg = urlImg + el.img
@@ -120,13 +134,15 @@ $(document).ready(function () {
             //             </h3>
             //          </a>
             //    </div>
-               
+
             //    `;
             // });
             $('.show-search').html(html)
-            let moreHtml = `<a href="${urlSearch+'?key='+key }" class="bg-danger mt-2 p-2 fw-medium text-white">Xem thêm ${products.length} sản phẩm</a> `;
+            let moreHtml = `<a href="${urlSearch + '?key=' + key}" class="bg-danger mt-2 p-2 fw-medium text-white">Xem thêm ${products.length} sản phẩm</a> `;
             $('.show-more-media').html(moreHtml)
+
          }
       });
+
    }
 });

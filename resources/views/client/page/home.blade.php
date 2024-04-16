@@ -112,10 +112,10 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-5">
+            {{-- <div class="mt-5">
                 <h5 class="text-uppercase fw-bold my-5">Đồ thể thao</h5>
                 <div class="row">
-                    {{-- @foreach ($productSport as $item)
+                    @foreach ($productSport as $item)
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6 mb-3">
                             <div class="product">
                                 <a href="{{ route('detailProduct', $product->id) }}">
@@ -130,7 +130,7 @@
                                 </a>
                             </div>
                         </div>
-                    @endforeach --}}
+                    @endforeach
 
 
                 </div>
@@ -139,7 +139,7 @@
                         <a href="" class="btn btn-outline-danger">Xem thêm...</a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             {{-- // đồ nhiều lượt xem --}}
             <div class="mt-5">
                 <h5 class="text-uppercase fw-bold my-5">Sản phẩm nhiều lượt xem nhất</h5>

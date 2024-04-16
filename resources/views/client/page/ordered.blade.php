@@ -14,7 +14,7 @@
                             <p>Rất hân hạnh được phụ vụ quý khách </p>
                         </div>
                         <div class="d-flex justify-content-evenly my-5">
-                            <a href="{{route('bill',$id)}}" class="btn btn-outline-secondary p-3 w-50 mx-2">Xem hóa đơn</a>
+                            <a href="{{route('profiles.profile')}}" class="btn btn-outline-secondary p-3 w-50 mx-2">Xem hóa đơn</a>
                             <a href="{{ route('home') }}" class="btn btn-danger w-75 p-3">Tiếp tục mua hàng</a>
                         </div>
                     </div>

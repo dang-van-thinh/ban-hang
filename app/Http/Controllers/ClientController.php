@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
 use App\Http\Requests\OrderRequest;
 use App\Mail\MailRepassed;
+use App\Mail\OrderByNotAccount;
 use App\Models\Bill;
 use App\Models\Category;
 use App\Models\Color;
@@ -42,8 +43,10 @@ class ClientController extends Controller
     protected $districts;
     protected $wards;
     protected $productReponsitory;
+    protected $payment;
     public function __construct()
     {
+        $this->payment = new PayController();
         $this->quanities = new Quanity();
         $this->bill = new Bill();
         $this->detailBill = new DetailBill();
@@ -176,12 +179,15 @@ class ClientController extends Controller
         } else {
             $product = $this->productReponsitory->getAllProduct($offset, $limit);
             $priceMax = $this->productReponsitory->getPriceMax();
+            $priceMin = $this->productReponsitory->getPriceMin();
+
 
             $products = [
                 'products' => $product,
                 'category' => 0,
                 'orderBy' => null,
-                'priceMax' => $priceMax
+                'priceMax' => $priceMax,
+                'priceMin'=> $priceMin
             ];
             // dd($product);
             // die;
@@ -210,6 +216,7 @@ class ClientController extends Controller
     }
     public function detailProduct($id_product)
     {
+        $this->productReponsitory->upToViewForProduct($id_product);
         $title = 'Chi tiết sản phẩm';
         $categoryChill = $this->category;
         $category = $this->category->getCategoryParent();
@@ -219,7 +226,7 @@ class ClientController extends Controller
         $script = [
             'js/client/libs/detailProduct.js'
         ];
-        $this->productReponsitory->upToViewForProduct($product[0]->id);
+        
         $categoryProduct = $this->productReponsitory->getProductForCategory($product[0]->category_id, $product[0]->id);
         // dd($categoryProduct);
         // die;
@@ -315,6 +322,7 @@ class ClientController extends Controller
     }
     public function storeOrder(OrderRequest $request)
     {
+         
         if (Auth::id()) {
             $bill = [
                 'user_id' => Auth::user()->id,
@@ -334,12 +342,20 @@ class ClientController extends Controller
             // không có tài khoản thì sẽ tạo mới rồi trả ra ID user
             // trường hợp này sẽ tạm lấy số điện thoai lam pw 
             // và gửi email thoonng tin đơn hàng về email , và có mã xác nhận về email đẻ xác thực tài khoản
+            // tạo mk ngẫu nhiên và gửi về cho user mới
+            $pwRandom = '';
+            $pwFomat = '0123456789';
+            for ($i = 0; $i < 8; $i++) {
+                $pwRandom .= $pwFomat[rand(0, 10 - 1)];
+            }
+            // dd($pwRandom);
+            // die;
             $user = [
                 'name' => $request->name,
                 'email' => $request->email,
                 'phone_number' => $request->phone,
                 'role_id' => 2,
-                'password' => Hash::make($request->phone),
+                'password' => Hash::make($pwRandom),
                 'address' => $request->address,
                 'province_id' => $request->provinces,
                 'district_id' => $request->districts,
@@ -347,6 +363,9 @@ class ClientController extends Controller
             ];
             $userId = $this->users->addUser($user);
             // nhận lại id tài khoản vừa tạo
+            Mail::to($request->email)->send(new OrderByNotAccount($request->email,$pwRandom));
+            //gửi pw về email cho user mới
+            //tao  bill
             $bill = [
                 'user_id' => $userId->id,
                 'name' => $request->name,
@@ -361,11 +380,12 @@ class ClientController extends Controller
                 'total_quanity' => $request->input('total_quanity'),
                 'created_at' => $this->datetime->setTimezone($this->timezone),
             ];
+
         }
 
         $idBill = $this->bill->addBill($bill);
         if ($idBill) {
-            $bill = Session::get('cart'); // lấy trên sesstion
+            $bill = Session::get('cart'); // lấy trên session
 
             // dd($bill);
             // die;
@@ -374,7 +394,7 @@ class ClientController extends Controller
                 // ép về oject nếu muốn
                 // (object) $bill[$i];
 
-                //thực hiện xóa số lượng sản phẩm
+                //thực hiện xóa số lượng sản phẩm sau khi mua trong co so du lieu
                 $product_id =  $bill[$i]['product_id'];
                 $color_id =  $bill[$i]['color_id'];
                 $size_id =  $bill[$i]['size_id'];
@@ -390,12 +410,19 @@ class ClientController extends Controller
                 $bill[$i]['bill_id'] = $idBill->id;
                 $this->detailBill->insert($bill[$i]);
             }
-            Session::forget('cart'); // xoa
+            Session::forget('cart'); // xoa cart
         }
-
-        return redirect()->route('ordered', $idBill);
+        /// check phuong thuc thanh toan cua don hang
+            // neu nhu thanh toan COD thi bo qua
+            // thnah toan online thi du laij de thanh toan
+            //=1 COD
+            //=2 : momo
+            if($request->pay == 2){
+               return $this->payment->momo($request);
+            }
+        return redirect()->route('ordered');
     }
-    public function orderedProduct($id)
+    public function orderedProduct()
     {
         $title = 'Thành công';
         $categoryChill = $this->category;
@@ -406,13 +433,9 @@ class ClientController extends Controller
             'title',
             'categoryChill',
             'category',
-            'id'
         ));
     }
-    public function bill($id)
-    {
-        echo $id;
-    }
+
 
     public function forgotPassword($token)
     {

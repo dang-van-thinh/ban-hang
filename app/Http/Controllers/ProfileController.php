@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bill;
 use App\Models\Category;
 use App\Models\Users;
 use Illuminate\Http\Request;
@@ -13,9 +14,11 @@ class ProfileController extends Controller
     protected $category;
     protected $users;
     protected $categoryChill;
+    protected $bill;
     public function __construct(){
         $this->users = new Users();
         $this->category = new Category();
+        $this->bill = new Bill();
     }
     //
     public function profile(){
@@ -23,11 +26,17 @@ class ProfileController extends Controller
         $categoryChill = $this->category;
         $category = $this->category->getCategoryParent();
         $user = Auth::user();
+        $bill = $this->bill->BillByUser($user->id);
+        $oneBill = $this->bill;
+        // dd($bill);
+        // die;
         return view('client.page.profiles.profile',compact(
             'title',
             'category',
             'categoryChill',
-            'user'
+            'user',
+            'bill',
+            'oneBill'
         ));
     }
     public function profileBill(){

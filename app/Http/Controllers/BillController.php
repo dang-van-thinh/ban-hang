@@ -27,7 +27,8 @@ class BillController extends Controller
         $numberPage = ceil($count / $limit);
         $bills = $this->bill->allBill($offset,$limit);
         $script = [
-            'js/admin/detailBill.js'
+            'js/admin/detailBill.js',
+            'js/admin/listBill.js',
         ];
         return view('admin.bill.list',compact(
             'title',
@@ -42,6 +43,16 @@ class BillController extends Controller
         
         $data = [
             'bills'=>$bills
+        ];
+        return response()->json($data);
+    }
+    public function updateStatusBill(Request $request){
+        $idBill = $request->input('idBill');
+        $status = $request->input('status');
+        $this->bill->updateStatusBill($idBill,$status);
+        $data = [
+            'status'=>200,
+            'message'=>'Success'
         ];
         return response()->json($data);
     }

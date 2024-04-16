@@ -20,13 +20,17 @@
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->email }}</td>
                     <td>
-                        <select name="status" id="status">
+                        <select name="status" {{ ($item->status == 5 || $item->status == 0 ? true : false ) ? 'disabled ' : '' }} 
+                            id="status" 
+                            class="form-select"
+                            data-url="{{route('ajaxUpdateStatus')}}"
+                            data-id="{{$item->id}}">
+                            <option {{ $item->status == 0 ? 'selected' : '' }} value="0">Hủy đơn hàng</option>
                             <option {{ $item->status == 1 ? 'selected' : '' }} value="1">Đang xử lý</option>
                             <option {{ $item->status == 2 ? 'selected' : '' }} value="2">Đã xử lý</option>
-                            <option {{ $item->status == 3 ? 'selected' : '' }} value="3">Đang chuẩn bị hàng</option>
-                            <option {{ $item->status == 4 ? 'selected' : '' }} value="4">Chuẩn bị giao hàng</option>
-                            <option {{ $item->status == 5 ? 'selected' : '' }} value="5">Đang giao hàng</option>
-                            <option {{ $item->status == 6 ? 'selected' : '' }} value="6">Đã giao</option>
+                            <option {{ $item->status == 3 ? 'selected' : '' }} value="3">Đang vận chuyển</option>
+                            <option {{ $item->status == 4 ? 'selected' : '' }} value="4">Đang giao hàng</option>
+                            <option {{ $item->status == 5 ? 'selected' : '' }} value="5">Đã giao</option>
                         </select>
                     </td>
                     <td>
@@ -37,7 +41,7 @@
                             data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                             Xem chi tiết
                         </button>
-                        <a href="{{ route('admin.category.edit', $item->id) }}" class="btn btn-warning">Sửa</a>
+                        {{-- <a href="" class="btn btn-warning">Sửa</a> --}}
                     </td>
                 </tr>
             @endforeach

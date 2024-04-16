@@ -154,7 +154,7 @@ class ProductReponsitory
     ->get();
   }
   public function getProductBySearch($key){
-    return Product::where('name','like','%'.$key.'%')
+    return Product::where('product.name','like','%'.$key.'%')
     ->get();
   }
   public function upToViewForProduct($id)

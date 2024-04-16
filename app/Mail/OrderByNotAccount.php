@@ -2,7 +2,6 @@
 
 namespace App\Mail;
 
-use Faker\Provider\ar_EG\Address;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -10,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class MailRepassed extends Mailable
+class OrderByNotAccount extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -20,8 +19,8 @@ class MailRepassed extends Mailable
     protected $email;
     protected $password;
     public function __construct($email,$password)
-    {   
-        // nhận dữ liệu
+    {
+        //
         $this->email = $email;
         $this->password = $password;
     }
@@ -31,9 +30,8 @@ class MailRepassed extends Mailable
      */
     public function envelope(): Envelope
     {
-        // tên tiêu đề gửi
         return new Envelope(
-            subject: 'Lấy lại mật khẩu',
+            subject: 'Mật khẩu cho tài khoản mới của bạn',
         );
     }
 
@@ -42,13 +40,12 @@ class MailRepassed extends Mailable
      */
     public function content(): Content
     {
-        // compact dữ liệu đến trang views để sử dụng
         return new Content(
-            view: 'client.page.emails.forgot',
-            with:[
-                'email'=>$this->email,
-                'password'=>$this->password
-                ]
+            view: 'client.page.emails.orderByNotAccount',
+            with: [
+                'email'=> $this->email,
+                'password'=> $this->password
+            ]
         );
     }
 

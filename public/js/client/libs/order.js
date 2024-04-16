@@ -26,6 +26,16 @@ if (firstPrice >= 500000) {
 $('#totalQuanity').val(totalQuanity);
 $('#firstPrice').text(firstPrice);
 
+// payment show button submit
+$('.pay').on('click',function(){
+    let _this = $(this);
+    if(_this.val() == 2){
+        $('#2').show();
+    }else{
+        $('#2').hide();
+    }
+})
+
 
 // location viet nam
 $('#provinces').change(function () {

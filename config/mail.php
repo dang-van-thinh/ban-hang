@@ -40,8 +40,8 @@ return [
             'host' => 'smtp.gmail.com',
             'port' => 587,
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-            'username' => 'dangvanthinh372004@gmail.com',
-            'password' => "fgpv hzqw aias gxwo",
+            'username' => 'dangvanthinh372004@gmail.com', //sửa
+            'password' => "fgpv hzqw aias gxwo", // mã ứng dụng khi cài 2 bước xác thực cho ứng dụng
             'timeout' => null,
             'local_domain' => env('MAIL_EHLO_DOMAIN'),
         ],
@@ -107,7 +107,7 @@ return [
     |
     */
 
-    'from' => [
+    'from' => [ // sửa
         'address' =>  'dangvanthinh372004@gmail.com',
         'name' => 'ThinhSport',
     ],

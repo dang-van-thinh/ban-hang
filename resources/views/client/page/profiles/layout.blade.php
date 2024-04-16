@@ -8,9 +8,9 @@
                         <li class="nav-item">
                           <a class="" href="{{route('profiles.profile')}}">Thông tin người dùng</a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                           <a class="" href="{{route('profiles.profile-bill')}}">Đơn hàng</a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
                           <a class=" " href="{{route('profiles.profile-setting')}}">Cài đặt tài khoản</a>
                         </li>

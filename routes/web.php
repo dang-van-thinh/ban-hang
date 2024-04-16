@@ -6,6 +6,7 @@ use App\Http\Controllers\BillController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\LoginCotronller;
+use App\Http\Controllers\PayController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -86,19 +87,23 @@ Route::get('detail-product/{id_product?}', [ClientController::class,'detailProdu
 Route::get('cart', [ClientController::class,'cartProduct'])->name('cart');
 Route::get('order', [ClientController::class,'orderProduct'])->name('order');
 Route::post('store-order',[ClientController::class,'storeOrder'])->name('storeOrder');
-Route::get('ordered/{id}', [ClientController::class,'orderedProduct'])->name('ordered');
+Route::get('ordered/{id?}', [ClientController::class,'orderedProduct'])->name('ordered');
 Route::get('bill/{id}', [ClientController::class,'bill'])->name('bill');
+
+// mail
 Route::get('forgot/{token}', [ClientController::class, 'forgotPassword'])->name('forgotPassword');
 Route::post('forgot-pw', [ClientController::class, 'forgot'])->name('forgot');
-Route::get('test-email', [ClientController::class, 'testEmail'])->name('testEmail');
-
+// Route::get('test-email', [ClientController::class, 'testEmail'])->name('testEmail');
+//profile user
 Route::prefix('profiles')->name('profiles.')->middleware('authen')->group(function(){
 Route::get('profile-infor',[ProfileController::class,'profile'])->name('profile');
 Route::get('profile-bill',[ProfileController::class,'profileBill'])->name('profile-bill');
 Route::get('profile-setting',[ProfileController::class,'profileSetting'])->name('profile-setting');
 Route::post('profile-delete-account/{id}',[ProfileController::class,'deleteAccount'])->name('profileDeleteAccount');
-
 });
+
+// pay 
+Route::get('pay/momo',[PayController::class,'momo'])->name('paymomo');
 
 
 // Route::get('testApi', [ClientController::class,'testApi'])->name('api');

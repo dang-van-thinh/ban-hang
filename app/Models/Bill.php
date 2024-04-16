@@ -31,7 +31,7 @@ class Bill extends Model
         return Bill::create($data);
     }
     public function allBill($offset,$limit){
-        return Bill::offset($offset)->limit($limit)->get();
+        return Bill::offset($offset)->limit($limit)->orderBy('id','desc')->get();
     }
     public function countBill(){
         return Bill::count();
@@ -51,5 +51,18 @@ class Bill extends Model
         'pr.name as product_name','pr.price as price','pr.img as img',
         'color.name as color_name','size.name as size_name')
         ->get();
+    }
+    public function BillByUser($idUser){
+        return Bill::join('provinces as p','p.code','bill.province_id')
+        ->join('districts as d','d.code','bill.district_id')
+        ->join('wards as w','w.code','bill.ward_id')
+        ->select('bill.id','bill.name','bill.pay','bill.phone_number','bill.email','bill.date_time_buy','bill.address','bill.status',
+        'd.name as districtName','w.name as wardName','p.name as provinceName')
+        ->where('bill.user_id','=',$idUser)
+        ->get();
+    }
+    public function updateStatusBill($idBill,$status){
+        return Bill::find($idBill)
+        ->update(['status'=>$status]);
     }
 }

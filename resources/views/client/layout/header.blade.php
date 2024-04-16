@@ -73,7 +73,7 @@
                                     <ul class="dropdown-menu me-5 me-n" style="transform: translate(-50px,0)">
                                         <li><a class="dropdown-item" href="{{ route('profiles.profile') }}">Thông tin
                                                 người dùng</a></li>
-                                        <li><a class="dropdown-item" href="{{ route('profiles.profile-bill') }}">Đơn
+                                        <li><a class="dropdown-item" href="{{ route('profiles.profile') }}">Đơn
                                                 hàng</a></li>
                                         <li>
                                             <hr class="dropdown-divider">
