@@ -7,7 +7,7 @@ if (cartLocal) {
 // console.log(carts);
 $('#numberCart').text(carts.length);
 
-
+console.log(carts);
 function showAndHideTableCart(e) {
     
     if (carts.length < 1) {
@@ -51,7 +51,7 @@ for (const item of carts) {
                                 </td>
                                 <td>
                                     <div class="d-flex">
-                                        <input hidden type="text" name="price[]" value="${prices}">
+                                        <input hidden type="text" name="price[]" value="${item.price}">
                                         <span>${prices}</span>
                                         <span>VNĐ</span>
                                     </div>

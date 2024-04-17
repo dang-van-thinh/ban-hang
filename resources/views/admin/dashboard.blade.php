@@ -6,13 +6,12 @@
         <div class="d-flex align-items-end row">
           <div class="col-sm-7">
             <div class="card-body">
-              <h5 class="card-title text-primary">Congratulations John! 🎉</h5>
+              <h5 class="card-title text-primary">Chào mừng bạn đến trang quản trị <span class="fw-bold">ThinhSport</span> 🎉</h5>
               <p class="mb-4">
-                You have done <span class="fw-bold">72%</span> more sales today. Check your new badge in
-                your profile.
+                Bạn có <span class="fw-bold"> {{$dataDashboard['order']}} </span> đơn hàng mới ngày hôm nay . Kiểm tra ngay nhé
               </p>
 
-              <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Badges</a>
+              <a href="{{ route('admin.bill.index') }}" class="btn btn-sm btn-outline-primary">Xem ngay</a>
             </div>
           </div>
           <div class="col-sm-5 text-center text-sm-left">
@@ -36,11 +35,7 @@
             <div class="card-body">
               <div class="card-title d-flex align-items-start justify-content-between">
                 <div class="avatar flex-shrink-0">
-                  <img
-                    src="{{asset('img/icons/unicons/chart-success.png')}}"
-                    alt="chart success"
-                    class="rounded"
-                  />
+                  <i class="fas fa-wallet fs-4 text-success"></i>
                 </div>
                 <div class="dropdown">
                   <button
@@ -59,9 +54,9 @@
                   </div>
                 </div>
               </div>
-              <span class="fw-semibold d-block mb-1">Profit</span>
-              <h3 class="card-title mb-2">$12,628</h3>
-              <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +72.80%</small>
+              <span class="fw-semibold fs-4 d-block mb-1">COD</span>
+              <h3 class="card-title fs-5 mb-2"> {{number_format($dataDashboard['cod'],0,',','.')}} đ</h3>
+              {{-- <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +72.80%</small> --}}
             </div>
           </div>
         </div>
@@ -70,11 +65,7 @@
             <div class="card-body">
               <div class="card-title d-flex align-items-start justify-content-between">
                 <div class="avatar flex-shrink-0">
-                  <img
-                    src="{{asset('img/icons/unicons/wallet-info.png')}}"
-                    alt="Credit Card"
-                    class="rounded"
-                  />
+                  <i class="far fa-credit-card fs-4 text-success"></i>
                 </div>
                 <div class="dropdown">
                   <button
@@ -93,9 +84,9 @@
                   </div>
                 </div>
               </div>
-              <span>Sales</span>
-              <h3 class="card-title text-nowrap mb-1">$4,679</h3>
-              <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.42%</small>
+              <span class="fs-4">MOMO</span>
+              <h3 class="card-title fs-5 text-nowrap mb-1">{{ number_format($dataDashboard['momo'], 0,',','.') }} đ</h3>
+              {{-- <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.42%</small> --}}
             </div>
           </div>
         </div>
@@ -166,7 +157,7 @@
             <div class="card-body">
               <div class="card-title d-flex align-items-start justify-content-between">
                 <div class="avatar flex-shrink-0">
-                  <img src="{{asset('img/icons/unicons/paypal.png')}}" alt="Credit Card" class="rounded" />
+                  <i class="fs-4 fas fa-users text-primary"></i>
                 </div>
                 <div class="dropdown">
                   <button
@@ -185,9 +176,9 @@
                   </div>
                 </div>
               </div>
-              <span class="d-block mb-1">Payments</span>
-              <h3 class="card-title text-nowrap mb-2">$2,456</h3>
-              <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt"></i> -14.82%</small>
+              <span class="d-block mb-1">Người dùng đã đăng ký</span>
+              <h3 class="card-title text-nowrap mb-2"> {{$dataDashboard['user']}} </h3>
+              {{-- <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt"></i> -14.82%</small> --}}
             </div>
           </div>
         </div>
@@ -196,7 +187,7 @@
             <div class="card-body">
               <div class="card-title d-flex align-items-start justify-content-between">
                 <div class="avatar flex-shrink-0">
-                  <img src="{{asset('img/icons/unicons/cc-primary.png')}}" alt="Credit Card" class="rounded" />
+                  <i class="fab fa-product-hunt fs-4 text-danger"></i>
                 </div>
                 <div class="dropdown">
                   <button
@@ -215,9 +206,9 @@
                   </div>
                 </div>
               </div>
-              <span class="fw-semibold d-block mb-1">Transactions</span>
-              <h3 class="card-title mb-2">$14,857</h3>
-              <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.14%</small>
+              <span class="fw-semibold d-block mb-1">Tổng sản phẩm đã bán</span>
+              <h3 class="card-title mb-2"> {{$dataDashboard['quanity']}} </h3>
+              {{-- <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.14%</small> --}}
             </div>
           </div>
         </div>

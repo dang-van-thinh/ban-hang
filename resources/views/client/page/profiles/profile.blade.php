@@ -50,35 +50,40 @@
                                         @if ($item->status == 5)
                                             <a href="" class="btn btn-success">Đánh giá</a>
                                         @elseif ($item->status == 4)
-                                            <span class="btn btn-success">Đã nhận được hàng</span>
-                                        @elseif ($item->status == 0)
-                                            <span class="btn btn-success">Đã hủy đơn hàng</span>
-                                        @else
-                                            <a href="" class="btn btn-danger">Hủy đơn hàng</a>
+                                        <a href="#" class="btn btn-success status" 
+                                        data-url="{{route('ajaxUpdateStatus')}}" 
+                                        data-status="5"
+                                        data-id="{{$item->id}}">Đã nhận được hàng</a>
+                                        
+                                        @elseif($item->status == 1 || $item->status == 2 )
+                                            <a href="#" class="btn btn-danger status" 
+                                            data-url="{{route('ajaxUpdateStatus')}}" 
+                                            data-status="0"
+                                            data-id="{{$item->id}}">Hủy đơn hàng</a>
                                         @endif
                                         
                                         @switch($item->status)
                                             @case(0)
-                                                <span class="btn btn-info"> Đơn hàng đã hủy</span>
+                                                <span class="p-3 badge bg-info text-dark fs-6 fw-normal"> Đơn hàng đã hủy</span>
                                             @break
                                             @case(1)
-                                                <span class="btn btn-info"> Đang xử lý</span>
+                                                <span class="p-3 badge bg-info text-dark fs-6 fw-normal"> Đang xử lý</span>
                                             @break
 
                                             @case(2)
-                                                <span class="btn btn-info"> Đang chuẩn bị hàng</span>
+                                                <span class="p-3 badge bg-info text-dark fs-6 fw-normal"> Đang chuẩn bị hàng</span>
                                             @break
 
                                             @case(3)
-                                                <span class="btn btn-info"> Đang vận chuyển</span>
+                                                <span class="p-3 badge bg-info text-dark fs-6 fw-normal"> Đang vận chuyển</span>
                                             @break
 
                                             @case(4)
-                                                <span class="btn btn-info"> Đang giao đến bạn </span>
+                                                <span class="p-3 badge bg-info text-dark fs-6 fw-normal"> Đang giao đến bạn </span>
                                             @break
 
                                             @case(5)
-                                                <span class="btn btn-info"> Đã giao</span>
+                                                <span class="p-3 badge bg-info text-dark fs-6 fw-normal"> Đã giao</span>
                                             @break
                                         @endswitch
                                     </div>

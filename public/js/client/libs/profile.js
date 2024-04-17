@@ -1,7 +1,8 @@
 $(document).ready(function () {
-    $('.status').change(function() {
+    $('.status').click(function(e) {
+        e.preventDefault()
         let _this = $(this);
-        let status = _this.val()
+        let status = _this.data('status')
         let url = _this.data('url');
         let idBill = _this.data('id');
         let data = {

@@ -261,6 +261,7 @@ class ClientController extends Controller
     {
         $id = $request->input('id');
         $price = $request->input('price');
+        
         $size = $request->input('size');
         $color = $request->input('color');
         $quanity = $request->input('quanity');
@@ -269,9 +270,11 @@ class ClientController extends Controller
         ];
         // $productBill = [];
         for ($i = 0; $i < count($id); $i++) {
+            // dd(str_replace('.','',$price[$i]));
+            // die;
             $productBill[] = [
                 'product_id' => $id[$i],
-                'price_current' => $price[$i],
+                'price_current' => str_replace('.','',$price[$i]),
                 'quanity_buy' => $quanity[$i],
                 'color_id' => $color[$i],
                 'size_id' => $size[$i]

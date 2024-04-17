@@ -8,7 +8,6 @@ $(document).ready(function() {
         arrCart = JSON.parse(itemLocal);
     }
     $('#numberCart').text(arrCart.length);
-
     
     // add product to cart
     $('#btn_add_cart').click(() => {
@@ -93,8 +92,17 @@ $(document).ready(function() {
         quanityProduct(idProduct, color, size);
     })
 
-
-    // up to quanity
+    // change to quanity
+    // input fail fomart
+    $('#numberOrder').on('change',function () {
+        let _this = $(this);
+        let quanity = $('#quanityProduct').text()
+        if(_this.val() > Number(quanity) ){
+            _this.val(Number(quanity));
+        }else if(_this.val() < 1){
+            _this.val(1)
+        }
+    })
     $('#plus').click(() => {
         upToProduct();
     })
@@ -133,16 +141,18 @@ $(document).ready(function() {
                     $('#numberOrder').attr('max', 0).val(0)
                     $('#btn_add_cart').css('cursor', 'no-drop');
                     $('#btn_add_cart').prop('disabled', true);
+                } else {
+                    console.log(response.quanity.quanity_pr);
+                    // if (response.quanity.quanity_pr == 0) {
+                    //     $('#btn_add_cart').css('cursor', 'no-drop');
+                    //     $('#btn_add_cart').prop('disabled', true);
+                    // }
+                    $('#quanityProduct').text(response.quanity.quanity_pr);
+                    $('#numberOrder').attr('max', response.quanity.quanity_pr).val(1);
+                    $('#btn_add_cart').css('cursor', 'pointer');
+                    $('#btn_add_cart').prop('disabled', false);
                 }
-                console.log(response.quanity.quanity_pr);
-                // if (response.quanity.quanity_pr == 0) {
-                //     $('#btn_add_cart').css('cursor', 'no-drop');
-                //     $('#btn_add_cart').prop('disabled', true);
-                // }
-                $('#quanityProduct').text(response.quanity.quanity_pr);
-                $('#numberOrder').attr('max', response.quanity.quanity_pr).val(1);
-                $('#btn_add_cart').css('cursor', 'pointer');
-                $('#btn_add_cart').prop('disabled', false);
+                
 
                 // console.log(response.quanity.quanity_pr);
             },

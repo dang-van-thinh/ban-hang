@@ -30,25 +30,29 @@ class ProfileController extends Controller
         $oneBill = $this->bill;
         // dd($bill);
         // die;
+        $script = [
+            'js/client/libs/profile.js'
+        ];
         return view('client.page.profiles.profile',compact(
             'title',
             'category',
             'categoryChill',
             'user',
             'bill',
-            'oneBill'
+            'oneBill',
+            'script'
         ));
     }
-    public function profileBill(){
-        $title = 'Đơn hàng';
-        $categoryChill = $this->category;
-        $category = $this->category->getCategoryParent();
-        return view('client.page.profiles.bill',compact(
-            'title',
-            'category',
-            'categoryChill'
-        ));
-    }
+    // public function profileBill(){
+    //     $title = 'Đơn hàng';
+    //     $categoryChill = $this->category;
+    //     $category = $this->category->getCategoryParent();
+    //     return view('client.page.profiles.bill',compact(
+    //         'title',
+    //         'category',
+    //         'categoryChill'
+    //     ));
+    // }
     public function profileSetting(){
         $title = 'Cài đặt';
         $categoryChill = $this->category;

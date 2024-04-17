@@ -169,11 +169,11 @@
                 <div data-i18n="Account Settings">Hóa đơn</div>
               </a>
               <ul class="menu-sub">
-                <li class="menu-item">
+                {{-- <li class="menu-item">
                   <a href="" class="menu-link">
                     <div data-i18n="Account">Thêm mới</div>
                   </a>
-                </li>
+                </li> --}}
                 <li class="menu-item">
                   <a href="{{route('admin.bill.index')}}" class="menu-link">
                     <div data-i18n="Account">Danh sách</div>

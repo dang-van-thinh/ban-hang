@@ -39,13 +39,7 @@ class ProductController extends Controller
         $this->productVariant = new ProductVariant();
         $this->quanity = new Quanity();
     }
-    public function dashboard()
-    {
-        // dd(Auth::user()->role_id);
-        // die;
-        $title  = 'Quản lý trang bán hàng';
-        return view('admin.dashboard', compact('title'));
-    }
+    
 
     public function index($page=0)
     {

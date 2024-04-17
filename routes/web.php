@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AjaxController;
+use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\AttributeController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\CategoryController;
@@ -29,7 +30,7 @@ use Illuminate\Support\Facades\Route;
 
 // route product admin
 Route::prefix('admin')->name('admin.')->middleware('authen')->group(function () {
-    Route::get('/', [ProductController::class, 'dashboard'])->name('dashboard')->middleware('role.admin');
+    Route::get('/', [AnalyticsController::class, 'dashboard'])->name('dashboard')->middleware('role.admin');
     //product 
     Route::prefix('product')->name('product.')->middleware('role.admin')->group(function () {
         Route::get('list/{page?}', [ProductController::class, 'index'])->name('index');

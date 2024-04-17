@@ -21,8 +21,7 @@
                     <td>{{ $item->email }}</td>
                     <td>
                         <select name="status" {{ ($item->status == 5 || $item->status == 0 ? true : false ) ? 'disabled ' : '' }} 
-                            id="status" 
-                            class="form-select"
+                            class="form-select status"
                             data-url="{{route('ajaxUpdateStatus')}}"
                             data-id="{{$item->id}}">
                             <option {{ $item->status == 0 ? 'selected' : '' }} value="0">Hủy đơn hàng</option>

@@ -59,6 +59,7 @@ class Bill extends Model
         ->select('bill.id','bill.name','bill.pay','bill.phone_number','bill.email','bill.date_time_buy','bill.address','bill.status',
         'd.name as districtName','w.name as wardName','p.name as provinceName')
         ->where('bill.user_id','=',$idUser)
+        ->orderBy('bill.id','desc')
         ->get();
     }
     public function updateStatusBill($idBill,$status){

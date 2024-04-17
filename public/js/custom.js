@@ -72,12 +72,16 @@ $(document).ready(function () {
          let url = _this.data('url');
          search(key, url);
          $('.media').show()
+        $('.show-search').show();
+
       $('#key').on('keypress keydown',function () {
          let _this = $(this);
          let key = _this.val();
          let url = _this.data('url');
          search(key, url);
          $('.media').show()
+        $('.show-search').show();
+
       })
    })
 
@@ -86,6 +90,8 @@ $(document).ready(function () {
         // $('.show-search').html('');
         // $('.show-more-media').html('');
         $('.media').hide();
+        $('.show-search').hide();
+      
       }
     });
 
@@ -107,10 +113,11 @@ $(document).ready(function () {
             let products = res.product
             let html = '';
             for (let i = 0; i < (products.length); i++) {
+               
                let linkDirect = urlDirect + '/' + products[i].id;
                let linkImg = urlImg + products[i].img;
                html += `
-               <div class="item-media mb-2">
+               <div class="item-media ms-4 mb-2">
                      <a href="${linkDirect}" id="media-a" data-id="${products[i].id}" class="d-flex">
                         <img id="media-img" src="${linkImg}" alt="">
                         <h3 id="media-title" class="fw-medium fs-6 ms-2 text-dark">
@@ -120,6 +127,9 @@ $(document).ready(function () {
                </div>
                
                `;
+               if(i == 5){
+                  break;
+               }
             }
             // res.product.forEach(el => {
             //    let linkDirect = urlDirect + '/' + el.id;

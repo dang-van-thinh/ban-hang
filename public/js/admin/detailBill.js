@@ -56,21 +56,7 @@ $(document).ready(function () {
                        <p class="ms-2">${address}</p>
                     </div>
                    </li>
-                   <li class="nav-item">
-                    <div class="d-flex">
-                       <p class="fw-bold">Trạng thái:</p>
-                       <p class="ms-2">
-                       <select name="status" id="status">
-                            <option ${bill[0].status == 1 ? 'selected' : ''} value="1">Đang xử lý</option>
-                            <option ${bill[0].status == 2 ? 'selected' : ''} value="2">Đã xử lý</option>
-                            <option ${bill[0].status == 3 ? 'selected' : ''} value="3">Đang chuẩn bị hàng</option>
-                            <option ${bill[0].status == 4 ? 'selected' : ''} value="4">Chuẩn bị giao hàng</option>
-                            <option ${bill[0].status == 5 ? 'selected' : ''} value="5">Đang giao hàng</option>
-                            <option ${bill[0].status == 6 ? 'selected' : ''} value="6">Đã giao</option>
-                        </select>
-                       </p>
-                    </div>
-                   </li>
+                   
                    <li class="nav-item">
                     <div class="d-flex">
                        <p class="fw-bold">Chi tiết:</p>
@@ -132,3 +118,21 @@ $(document).ready(function () {
         });
     }
 });
+
+
+//phần trạng thái của đơn hàng chi tiết
+{/* <li class="nav-item">
+                    <div class="d-flex">
+                       <p class="fw-bold">Trạng thái:</p>
+                       <p class="ms-2">
+                       <select name="status" id="status">
+                            <option ${bill[0].status == 1 ? 'selected' : ''} value="1">Đang xử lý</option>
+                            <option ${bill[0].status == 2 ? 'selected' : ''} value="2">Đã xử lý</option>
+                            <option ${bill[0].status == 3 ? 'selected' : ''} value="3">Đang chuẩn bị hàng</option>
+                            <option ${bill[0].status == 4 ? 'selected' : ''} value="4">Chuẩn bị giao hàng</option>
+                            <option ${bill[0].status == 5 ? 'selected' : ''} value="5">Đang giao hàng</option>
+                            <option ${bill[0].status == 6 ? 'selected' : ''} value="6">Đã giao</option>
+                        </select>
+                       </p>
+                    </div>
+                   </li> */}
