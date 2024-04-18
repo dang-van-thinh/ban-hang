@@ -91,6 +91,7 @@ Route::post('store-order',[ClientController::class,'storeOrder'])->name('storeOr
 Route::get('ordered/{id?}', [ClientController::class,'orderedProduct'])->name('ordered');
 Route::get('bill/{id}', [ClientController::class,'bill'])->name('bill');
 
+
 // mail
 Route::get('forgot/{token}', [ClientController::class, 'forgotPassword'])->name('forgotPassword');
 Route::post('forgot-pw', [ClientController::class, 'forgot'])->name('forgot');
@@ -101,6 +102,8 @@ Route::get('profile-infor',[ProfileController::class,'profile'])->name('profile'
 Route::get('profile-bill',[ProfileController::class,'profileBill'])->name('profile-bill');
 Route::get('profile-setting',[ProfileController::class,'profileSetting'])->name('profile-setting');
 Route::post('profile-delete-account/{id}',[ProfileController::class,'deleteAccount'])->name('profileDeleteAccount');
+Route::get('change-password',[ProfileController::class,'changePassword'])->name('changePassword');
+Route::post('update-password',[ProfileController::class,'updatePassword'])->name('updatePassword');
 });
 
 // pay 

@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ChangPasswordRequest;
 use App\Models\Bill;
 use App\Models\Category;
 use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -68,6 +70,27 @@ class ProfileController extends Controller
             'category',
             'categoryChill',
             'user',
+            'script'
+        ));
+    }
+    public function updatePassword(ChangPasswordRequest $request){
+        $data = [
+            'password'=>Hash::make($request->newPW)
+        ];
+        $this->users->updateUser(Auth::id(),$data);
+        return redirect()->route('profiles.profile-setting')->with('success','Cập nhật mật khẩu thành công !');
+        }
+    public function changePassword(){
+        $title = 'Thay đổi mật khẩu';
+        $categoryChill = $this->category;
+        $category = $this->category->getCategoryParent();
+        $script = [
+            'js/client/libs/updatePassword.js'
+        ];
+        return view('client.page.profiles.update-password',compact(
+            'title',
+            'category',
+            'categoryChill',
             'script'
         ));
     }

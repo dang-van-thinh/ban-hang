@@ -15,19 +15,19 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 fw-medium">
                     <li class="nav-item me-3">
-                        <a class="nav-link fw-bold" aria-current="page" href="{{ route('home') }}">Trang chủ</a>
+                        <a class="nav-link fw-bold nav-header-menu" aria-current="page" href="{{ route('home') }}">Trang chủ</a>
                     </li>
 
                     @foreach ($category as $item)
                         <li class="nav-item dropdown me-2">
-                            <a class="nav-link dropdown-toggle fw-bold" href="#" role="button"
+                            <a class="nav-link dropdown-toggle fw-bold nav-header-menu" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 {{ $item->name }}
                             </a>
                             <ul class="dropdown-menu">
                                 @foreach ($categoryChill->getCategoryChill($item->id) as $items)
                                     <li class="">
-                                        <a class="dropdown-item fw-bold"
+                                        <a class="dropdown-item fw-bold nav-header-menu"
                                             href="{{ route('category', $items->id) }}">{{ $items->name }}</a>
                                     </li>
                                 @endforeach
@@ -71,14 +71,14 @@
 
                                     {{-- logined --}}
                                     <ul class="dropdown-menu me-5 me-n" style="transform: translate(-50px,0)">
-                                        <li><a class="dropdown-item" href="{{ route('profiles.profile') }}">Thông tin
+                                        <li><a class="dropdown-item fw-medium" href="{{ route('profiles.profile') }}">Thông tin
                                                 người dùng</a></li>
-                                        <li><a class="dropdown-item" href="{{ route('profiles.profile') }}">Đơn
+                                        <li><a class="dropdown-item fw-medium" href="{{ route('profiles.profile') }}">Đơn
                                                 hàng</a></li>
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
-                                        <li><a class="dropdown-item" href="{{ route('logout') }}">Đăng xuất</a></li>
+                                        <li><a class="dropdown-item fw-medium" href="{{ route('logout') }}">Đăng xuất</a></li>
                                     </ul>
                                 </li>
                             @else

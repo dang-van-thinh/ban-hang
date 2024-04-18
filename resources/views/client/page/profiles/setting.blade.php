@@ -5,7 +5,7 @@
             <div class="mb-3">
                 <h5 class="mb-3 text-uppercase">Hồ sơ của tôi</h5>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-10">
                         <form action="" method="post">
                             <input type="hidden" id="user_old" 
                             data-name="{{$user->name}}"
@@ -26,8 +26,10 @@
                                 <label for="" class="w-25 input-group-text">Số điện thoại</label>
                                 <input type="tel" name="phone_number" id="phone" class="form-control input-item" value="{{ $user->phone_number }}">
                                <button type="submit" class="btn btn-primary btn_save px-4">Lưu</button>
+                               <a href="{{route('profiles.changePassword')}}" class="btn btn-primary px-4" id="changePW">Đổi mật khẩu</a>
                             </div>
                         </form>
+                       
                     </div>
                 </div>
             </div>

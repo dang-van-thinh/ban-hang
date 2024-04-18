@@ -64,7 +64,7 @@ class ClientController extends Controller
     //
     public function home()
     {
-        $title = 'SPORT DA1 | Cửa hàng thể thao';
+        $title = 'ThinhSport | Cửa hàng thể thao nam';
         $categoryChill = $this->category;
         $productsNew = $this->productReponsitory->getProductsNewLimit();
         $productByView = $this->productReponsitory->getProductByViewLimit();
@@ -440,6 +440,7 @@ class ClientController extends Controller
     }
 
 
+    
     public function forgotPassword($token)
     {
         $title = 'Lấy lại mật khẩu';
@@ -465,10 +466,10 @@ class ClientController extends Controller
 
         // return redirect()->route('home')->with('error',' Không thành công !');
     }
-    public function testEmail(Request $request){
-        $email = $request->input('email');
-        // Mail::to('dangvanthinh372004@gmail.com')->send(new MailRepassed($email,$pass));
-    }
+    // public function testEmail(Request $request){
+    //     $email = $request->input('email');
+    //     // Mail::to('dangvanthinh372004@gmail.com')->send(new MailRepassed($email,$pass));
+    // }
 
 
 
