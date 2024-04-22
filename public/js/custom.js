@@ -84,6 +84,41 @@ $(document).ready(function () {
       }
     });
 
+    // show hide to login
+    showHidePassword();
+    function showHidePassword(){
+      let check = true;
+   $('.btn_login_button').on('click', function () {
+    let _this = $(this);
+    if (check) {
+        _this.siblings('input').attr('type', 'text');
+        _this.children('i').attr('class','fas fa-eye')
+        check = false
+    }else{
+        _this.siblings('input').attr('type','password')
+        _this.children('i').attr('class', 'fas fa-eye-slash')
+        check= true
+    }
+})
+    }
+
+// register
+showStatusRePassword()
+function showStatusRePassword(){
+   $('#rpw').on('change keypress keydown',function(){
+      let pw = $('#pws').val();
+      let _this = $(this);
+      console.log('hiii'.pw);
+      console.log(_this.val());
+      if(_this.val() == pw){
+         _this.css('border','solid 1px green');
+      }else{
+         _this.css('border','solid 1px red');
+      }
+   })
+}
+
+
    // function search 
    function search(key, url) {
       const urlDirect = $('.search-show').data('url')

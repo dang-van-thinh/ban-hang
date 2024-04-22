@@ -522,3 +522,16 @@ transform: translate(-175px,10px);
     background-color: ghostwhite;
     border-bottom: 1px solid rgb(222, 222, 222);
   }
+  
+
+  /* login */
+  .btn_input_login{
+    position: relative;
+    width: 100%;
+  }
+  .btn_login_button{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+  }

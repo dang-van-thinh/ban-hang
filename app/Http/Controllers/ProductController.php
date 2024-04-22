@@ -71,11 +71,15 @@ class ProductController extends Controller
         $color = $this->attReponsitory->getAllColor();
         $size = $this->attReponsitory->getAllSize();
         $title = 'Thêm sản phẩm';
+        $script = [
+            'js/admin/product/add.js'
+        ];
         return view('admin.product.add', compact([
             'title',
             'category',
             'color',
-            'size'
+            'size',
+            'script'
         ]));
     }
     public function store(ProductRequest $request)

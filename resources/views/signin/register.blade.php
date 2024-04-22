@@ -38,9 +38,14 @@
                 @endif
             </div>
             <div class="mb-3">
-                <label for="pw" class="form-label fw-bold">Mật khẩu</label>
-                <input type="password" name="pw" id="pw" placeholder="Nhập mật khẩu" class="form-control"
-                    value="{{ old('pw') }}">
+                <label for="pws" class="form-label fw-bold">Mật khẩu</label>
+                <div class="btn_input_login">
+                    <input type="password" name="pw" id="pws" placeholder="Nhập mật khẩu" class="form-control"
+                        value="{{ old('pw') }}">
+                        <button type="button" class="btn btn_login_button btn-show">
+                            <i class="fas fa-eye-slash"></i>
+
+                </div>
                 @if ($errors->has('pw'))
                     <i class="badge text-danger">
                         *{{ $errors->first('pw') }}
@@ -50,8 +55,12 @@
             <div class="mb-3">
                 <label for="rpw" class="form-label fw-bold">Nhập lại mật
                     khẩu</label>
-                <input type="password" name="rpw" id="rpw" placeholder="Nhập lại mật khẩu"
-                    class="form-control">
+                    <div class="btn_input_login">
+                        <input type="password" name="rpw" id="rpw" placeholder="Nhập lại mật khẩu"
+                            class="form-control">
+                            <button type="button" class="btn btn_login_button btn-show">
+                                <i class="fas fa-eye-slash"></i>
+                    </div>
             </div>
             <div class="mb-3">
                 <a href="#" id="had_account">Đã có tài khoản ?</a>
