@@ -27,5 +27,6 @@ Route::post('ajax-product-filter',[AjaxController::class,'productFilter'])->name
 Route::post('detail',[BillController::class,'detailBill'])->name('ajaxDetail');
 Route::post('update-update-bill',[BillController::class,'updateStatusBill'])->name('ajaxUpdateStatus');
 Route::post('search',[AjaxController::class,'search'])->name('ajaxSearch');
-
+Route::post('ajax-comment',[AjaxController::class,'storeCommentProduct'])->name('ajaxCommentProduct');
+Route::get('ajax-comment-index',[AjaxController::class,'indexComment'])->name('ajaxIndexComment');
 // Route::get('test',[AjaxController::class,'testController'])->name('test');

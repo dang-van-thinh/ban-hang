@@ -224,7 +224,8 @@ class ClientController extends Controller
         $getSize = $this->size;
         $getColor = $this->color;
         $script = [
-            'js/client/libs/detailProduct.js'
+            'js/client/libs/detailProduct.js',
+            'js/client/libs/comment.js'
         ];
         
         $categoryProduct = $this->productReponsitory->getProductForCategory($product[0]->category_id, $product[0]->id);

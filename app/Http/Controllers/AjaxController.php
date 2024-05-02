@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Comments;
 use App\Models\Districts;
 use App\Models\Product;
 use App\Models\Quanity;
@@ -13,11 +14,13 @@ use Illuminate\Http\Request;
 class AjaxController extends Controller
 {
     protected $quanity;
+protected $comments;
     protected $districts;
     protected $wards;
     protected $productReponsitories;
     public function __construct()
     {
+        $this->comments = new Comments();
         $this->wards = new Wards();
         $this->districts = new Districts();
         $this->quanity = new Quanity();
@@ -98,6 +101,32 @@ class AjaxController extends Controller
         ];
         return response()->json($data);
     } 
+
+    public function storeCommentProduct(Request $request){
+        $comment = [
+            'id_user'=>$request->input('user'),
+            'id_product'=>$request->input('product'),
+            'description'=>$request->input('description')
+        ];
+
+        $state = $this->comments->store($comment);
+
+        if($state){
+            $data = [
+                'status'=>'200',
+                'message'=>'oke roi nhe'
+            ];
+            return response()->json($data);
+        }
+        
+    }
+    public function indexComment(Request $request){
+        $comments = $this->comments->index($request->input('product'));
+        $data = [
+            'comments'=>$comments
+        ];
+        return response()->json($data);
+    }
 
 
     // function test API 

@@ -60,36 +60,36 @@ Route::prefix('admin')->name('admin.')->middleware('authen')->group(function () 
         Route::post('update/{id}', [UserController::class, 'update'])->name('update');
     });
     /// danh sách thuộc tính 
-    Route::prefix('attribute')->name('att.')->middleware('role.admin')->group(function (){
-        Route::get('list/{page?}',[AttributeController::class,'index'])->name('index');
-        Route::get('create',[AttributeController::class,'create'])->name('create');
-        Route::post('store',[AttributeController::class,'store'])->name('store');
-        Route::get('edit-color/{id}',[AttributeController::class,'editColor'])->name('editColor');
-        Route::post('update/{id}',[AttributeController::class,'update'])->name('update');
-        Route::get('edit-size/{id}',[AttributeController::class,'editSize'])->name('editSize');
-        Route::get('del/{id}',[AttributeController::class,'delColor'])->name('delColor');
-        Route::get('del/{id}',[AttributeController::class,'delSize'])->name('delSize');
+    Route::prefix('attribute')->name('att.')->middleware('role.admin')->group(function () {
+        Route::get('list/{page?}', [AttributeController::class, 'index'])->name('index');
+        Route::get('create', [AttributeController::class, 'create'])->name('create');
+        Route::post('store', [AttributeController::class, 'store'])->name('store');
+        Route::get('edit-color/{id}', [AttributeController::class, 'editColor'])->name('editColor');
+        Route::post('update/{id}', [AttributeController::class, 'update'])->name('update');
+        Route::get('edit-size/{id}', [AttributeController::class, 'editSize'])->name('editSize');
+        Route::get('del/{id}', [AttributeController::class, 'delColor'])->name('delColor');
+        Route::get('del/{id}', [AttributeController::class, 'delSize'])->name('delSize');
     });
     //bill
-    Route::prefix('bill')->name('bill.')->group(function(){
-        Route::get('list/{page?}',[BillController::class,'index'])->name('index');
+    Route::prefix('bill')->name('bill.')->group(function () {
+        Route::get('list/{page?}', [BillController::class, 'index'])->name('index');
     });
 });
 
 // route người dùng->middleware('role')
 Route::prefix('page')->name('client.')->group(function () {
-    Route::get('product/{id_category}',[ClientController::class,'product'])->name('product');
+    Route::get('product/{id_category}', [ClientController::class, 'product'])->name('product');
 });
-Route::get('/', [ClientController::class,'home'])->name('home');
-Route::get('search/{key?}', [ClientController::class,'search'])->name('search');
-Route::get('category/{id_category?}', [ClientController::class,'category'])->name('category');
-Route::get('category-view',[ClientController::class,'view'])->name('view');
-Route::get('detail-product/{id_product?}', [ClientController::class,'detailProduct'])->name('detailProduct');
-Route::get('cart', [ClientController::class,'cartProduct'])->name('cart');
-Route::get('order', [ClientController::class,'orderProduct'])->name('order');
-Route::post('store-order',[ClientController::class,'storeOrder'])->name('storeOrder');
-Route::get('ordered/{id?}', [ClientController::class,'orderedProduct'])->name('ordered');
-Route::get('bill/{id}', [ClientController::class,'bill'])->name('bill');
+Route::get('/', [ClientController::class, 'home'])->name('home');
+Route::get('search/{key?}', [ClientController::class, 'search'])->name('search');
+Route::get('category/{id_category?}', [ClientController::class, 'category'])->name('category');
+Route::get('category-view', [ClientController::class, 'view'])->name('view');
+Route::get('detail-product/{id_product?}', [ClientController::class, 'detailProduct'])->name('detailProduct');
+Route::get('cart', [ClientController::class, 'cartProduct'])->name('cart');
+Route::get('order', [ClientController::class, 'orderProduct'])->name('order');
+Route::post('store-order', [ClientController::class, 'storeOrder'])->name('storeOrder');
+Route::get('ordered/{id?}', [ClientController::class, 'orderedProduct'])->name('ordered');
+Route::get('bill/{id}', [ClientController::class, 'bill'])->name('bill');
 
 
 // mail
@@ -97,17 +97,20 @@ Route::get('forgot/{token}', [ClientController::class, 'forgotPassword'])->name(
 Route::post('forgot-pw', [ClientController::class, 'forgot'])->name('forgot');
 // Route::get('test-email', [ClientController::class, 'testEmail'])->name('testEmail');
 //profile user
-Route::prefix('profiles')->name('profiles.')->middleware('authen')->group(function(){
-Route::get('profile-infor',[ProfileController::class,'profile'])->name('profile');
-Route::get('profile-bill',[ProfileController::class,'profileBill'])->name('profile-bill');
-Route::get('profile-setting',[ProfileController::class,'profileSetting'])->name('profile-setting');
-Route::post('profile-delete-account/{id}',[ProfileController::class,'deleteAccount'])->name('profileDeleteAccount');
-Route::get('change-password',[ProfileController::class,'changePassword'])->name('changePassword');
-Route::post('update-password',[ProfileController::class,'updatePassword'])->name('updatePassword');
+Route::prefix('profiles')->name('profiles.')->middleware('authen')->group(function () {
+    Route::get('profile-infor', [ProfileController::class, 'profile'])->name('profile');
+    Route::get('profile-bill', [ProfileController::class, 'profileBill'])->name('profile-bill');
+    Route::get('profile-setting', [ProfileController::class, 'profileSetting'])->name('profile-setting');
+    Route::post('profile-delete-account/{id}', [ProfileController::class, 'deleteAccount'])->name('profileDeleteAccount');
+    Route::get('change-password', [ProfileController::class, 'changePassword'])->name('changePassword');
+    Route::post('update-password', [ProfileController::class, 'updatePassword'])->name('updatePassword');
 });
 
+// comment
+
+
 // pay 
-Route::get('pay/momo',[PayController::class,'momo'])->name('paymomo');
+Route::get('pay/momo', [PayController::class, 'momo'])->name('paymomo');
 
 
 // Route::get('testApi', [ClientController::class,'testApi'])->name('api');
