@@ -41,28 +41,13 @@ class ProductController extends Controller
     }
     
 
-    public function index($page=0)
+    public function index()
     {
         $title = 'Danh sách sản phẩm';
-        //phân trang
-        $curentPage = 1;
-        if($page > 0){
-            $curentPage = $page;
-        }
-         // trang hiện tại
-        $limit = 10; // số lượng sản phẩm có trong 1 trang
-        $perPage = $curentPage - 1;
-        $offset = intval($perPage * $limit);
-        $count = $this->productReponsitory->countProduct();
-        $numberPage = ceil($count / $limit);
-        $product =  $this->productReponsitory->getAllProduct($offset,$limit,0);
-        //    dd($product);
-        //    die;
+        $product =  $this->productReponsitory->getAllProduct(0);
         return view('admin.product.list', compact([
             'title',
             'product',
-            'numberPage'
-
         ]));
     }
     public function create()

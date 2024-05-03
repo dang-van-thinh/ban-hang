@@ -125,6 +125,25 @@
             </li>
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="fas fa-comment menu-icon"></i>
+                <div data-i18n="Account Settings">Bình luận</div>
+              </a>
+              <ul class="menu-sub">
+                {{-- <li class="menu-item">
+                  <a href="{{ route('admin.product.create') }}" class="menu-link">
+                    <div data-i18n="Account">Thêm mới</div>
+                  </a>
+                </li> --}}
+                <li class="menu-item">
+                  <a href="{{ route('admin.comments.index') }}" class="menu-link">
+                    <div data-i18n="Account">Danh sách</div>
+                  </a>
+                </li>
+                {{-- // --}}
+              </ul>
+            </li>
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="fas fa-users menu-icon"></i>
                 <div data-i18n="Account Settings">Người dùng</div>
               </a>

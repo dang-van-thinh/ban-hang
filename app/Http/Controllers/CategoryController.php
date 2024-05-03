@@ -21,28 +21,27 @@ class CategoryController extends Controller
         $this->product =  new Product();
         $this->productReponsitory = $productReponsitory;
     }
-    public function index($page=0)
+    public function index()
     {
         $title = 'Danh sách danh mục sản phẩm';
         
         //phân trang
-        $curentPage = 1;
-        if($page > 0){
-            $curentPage = $page;
-        }
-         // trang hiện tại
-        $limit = 10; // số lượng sản phẩm có trong 1 trang
-        $perPage = $curentPage - 1;
-        $offset = intval($perPage * $limit);
-        $count = $this->category->countAllCategory();
-        $numberPage = ceil($count / $limit);
-        $category = $this->category->getAllCategory($offset,$limit);
+        // $curentPage = 1;
+        // if($page > 0){
+        //     $curentPage = $page;
+        // }
+        //  // trang hiện tại
+        // $limit = 10; // số lượng sản phẩm có trong 1 trang
+        // $perPage = $curentPage - 1;
+        // $offset = intval($perPage * $limit);
+        // $count = $this->category->countAllCategory();
+        // $numberPage = ceil($count / $limit);
+        $category = $this->category->getAllCategory();
         $category_count = $this->productReponsitory;
         return view('admin.category.list', compact([
             'title',
             'category',
             'category_count',
-            'numberPage'
         ]));
     }
     public function create()

@@ -6,6 +6,7 @@ use App\Http\Controllers\AttributeController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\LoginCotronller;
 use App\Http\Controllers\PayController;
 use App\Http\Controllers\ProductController;
@@ -33,16 +34,16 @@ Route::prefix('admin')->name('admin.')->middleware('authen')->group(function () 
     Route::get('/', [AnalyticsController::class, 'dashboard'])->name('dashboard')->middleware('role.admin');
     //product 
     Route::prefix('product')->name('product.')->middleware('role.admin')->group(function () {
-        Route::get('list/{page?}', [ProductController::class, 'index'])->name('index');
+        Route::get('list', [ProductController::class, 'index'])->name('index');
         Route::get('create', [ProductController::class, 'create'])->name('create');
         Route::post('store', [ProductController::class, 'store'])->name('store');
         Route::get('del/{id}', [ProductController::class, 'delete'])->name('delete');
         Route::get('edit/{id}', [ProductController::class, 'edit'])->name('edit');
         Route::post('update/{id}', [ProductController::class, 'update'])->name('update');
     });
-    // danh sách sản phẩm
+    // danh sách danh mucj sản phẩm
     Route::prefix('category')->name('category.')->middleware('role.admin')->group(function () {
-        Route::get('list/{page?}', [CategoryController::class, 'index'])->name('index');
+        Route::get('list', [CategoryController::class, 'index'])->name('index');
         Route::get('create', [CategoryController::class, 'create'])->name('create');
         Route::post('store', [CategoryController::class, 'store'])->name('store');
         Route::get('del/{id}', [CategoryController::class, 'delete'])->name('delete');
@@ -52,7 +53,7 @@ Route::prefix('admin')->name('admin.')->middleware('authen')->group(function () 
 
     // danh sách người dùng
     Route::prefix('user')->name('user.')->middleware('role.admin')->group(function () {
-        Route::get('list/{page?}', [UserController::class, 'index'])->name('index');
+        Route::get('list', [UserController::class, 'index'])->name('index');
         Route::get('create', [UserController::class, 'create'])->name('create');
         Route::post('store', [UserController::class, 'store'])->name('store');
         Route::get('del/{id}', [UserController::class, 'delete'])->name('delete');
@@ -72,7 +73,11 @@ Route::prefix('admin')->name('admin.')->middleware('authen')->group(function () 
     });
     //bill
     Route::prefix('bill')->name('bill.')->group(function () {
-        Route::get('list/{page?}', [BillController::class, 'index'])->name('index');
+        Route::get('list', [BillController::class, 'index'])->name('index');
+    });
+    // comment
+    Route::prefix('comments')->name('comments.')->group(function(){
+        Route::get('comment/list',[CommentsController::class,'index'])->name('index');
     });
 });
 

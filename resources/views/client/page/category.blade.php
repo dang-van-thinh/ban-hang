@@ -88,17 +88,17 @@
                     </div>
                     <div class="border-top mb-3">
                         <div class="row" id="show_product">
-                            @foreach ($products['products'] as $product)
+                            @foreach ($product as $item)
                                 <div class="col-lg-3 col-md-6 col-sm-6 col-6 mt-3">
                                     <div class="product">
-                                        <a href="{{ route('detailProduct', $product->id) }}">
+                                        <a href="{{ route('detailProduct', $item->id) }}">
                                             <div class="image_product ">
-                                                <img src="{{ asset($product->img) }}" alt="" class="text-center">
+                                                <img src="{{ asset($item->img) }}" alt="" class="text-center">
                                             </div>
                                             <div class=" des_product ps-3">
-                                                <h5 class="fw-bold text-secondary text-uppercase">{{ $product->name }}</h5>
+                                                <h5 class="fw-bold text-secondary text-uppercase">{{ $item->name }}</h5>
                                                 <p class="text-danger fw-bold">
-                                                    {{ number_format($product->price, 0, ',', '.') }} <span>VNĐ</span></p>
+                                                    {{ number_format($item->price, 0, ',', '.') }} <span>VNĐ</span></p>
                                             </div>
                                         </a>
                                     </div>
@@ -107,7 +107,7 @@
                             @endforeach
                         </div>
                         <div class="mt-4">
-                            <nav aria-label="Page navigation example">
+                            {{-- <nav aria-label="Page navigation example">
                                 <ul class="pagination">
                                     <li class="page-item">
                                         <a class="page-link" href="#" aria-label="Previous">
@@ -128,7 +128,15 @@
                                         </a>
                                     </li>
                                 </ul>
-                            </nav>
+                            </nav> --}}
+                            <input type="hidden" name="" id="attFilter"
+                             data-url="{{route('ajaxProductOffset')}}"
+                              data-urldetail="{{route('detailProduct')}}"
+                               data-urlimage="{{asset('')}}" 
+                               data-orderby="{{ $products['orderBy'] }}">
+
+                               
+                            {{ $product->links() }}
                         </div>
 
                     </div>

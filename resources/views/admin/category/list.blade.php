@@ -15,7 +15,7 @@
                 <tr>
                     <td>{{ $item->id }}</td>
                     <td>{{ $item->name }}</td>
-                    <td>{{ $category_count->countProductWithCategory($item->id) }}</td>
+                    <td>{{ $category_count->countProduct($item->id) }}</td>
                     <td>
                         <a href="{{route('admin.category.delete',$item->id)}}" class="btn btn-danger">Xóa</a>
                         <a href="{{route('admin.category.edit',$item->id)}}" class="btn btn-warning">Sửa</a>
@@ -24,7 +24,7 @@
             @endforeach
         </tbody>
     </table>
-    <nav aria-label="Page navigation example">
+    {{-- <nav aria-label="Page navigation example">
         <ul class="pagination">
             <li class="page-item">
                 <a class="page-link" href="#" aria-label="Previous">
@@ -41,5 +41,6 @@
                 </a>
             </li>
         </ul>
-    </nav>
+    </nav> --}}
+    {{ $category->links()}}
 @endsection

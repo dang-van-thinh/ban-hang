@@ -13,12 +13,8 @@ class Category extends Model
         'name',
         'type'
     ];
-    public function getAllCategory($offset=null,$limit=null){
-        if($offset != null && $limit != null){
-            return Category::offset($offset)->limit($limit)->get();
-        }else{
-            return Category::all();
-        }
+    public function getAllCategory(){
+        return Category::paginate(10);
     }
     public function getCategoryForProduct($id_category){
         return Category::where('id','=',$id_category)->first();

@@ -15,7 +15,7 @@ class ProductReponsitory
   {
     $this->model = new Product();
   }
-  public function getAllProduct($offset, $limit, $category = null, $orderBy = null)
+  public function getAllProduct( $category = null, $orderBy = null)
   {
     $product = DB::table($this->table);
     if ($category) {
@@ -24,11 +24,11 @@ class ProductReponsitory
     if ($orderBy != null) {
       $product = $product->orderBy($orderBy, 'desc');
     }
-    $product = $product->offset($offset)->limit($limit)->get();
+    $product = $product->paginate(12);
 
     return $product;
   }
-
+  
   public function countProduct($id_category = null)
   {
     $count = DB::table($this->table);
@@ -146,16 +146,14 @@ class ProductReponsitory
    return $query->min('price');
 
   }
-  public function getProductWithCategory($id_category, $offset, $limit)
+  public function getProductWithCategory($id_category)
   {
     return Product::where('category_id', '=', $id_category)
-    ->offset($offset)
-    ->limit($limit)
-    ->get();
+    ->paginate(12);
   }
   public function getProductBySearch($key){
     return Product::where('product.name','like','%'.$key.'%')
-    ->get();
+    ->paginate(12);
   }
   public function upToViewForProduct($id)
   {

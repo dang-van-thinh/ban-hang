@@ -25,24 +25,23 @@ class UserController extends Controller
         $this->timeZone = new DateTimeZone('Asia/Ho_Chi_Minh');
     }
     //
-    public function index($page=0){
+    public function index(){
         $title = 'Danh sách người dùng';
         //phân trang
-        $curentPage = 1;
-        if($page > 0){
-            $curentPage = $page;
-        }
-         // trang hiện tại
-        $limit = 10; // số lượng sản phẩm có trong 1 trang
-        $perPage = $curentPage - 1;
-        $offset = intval($perPage * $limit);
-        $count = $this->user->countAllUsers();
-        $numberPage = ceil($count / $limit);
-        $users = $this->user->getAllUser($offset,$limit);
+        // $curentPage = 1;
+        // if($page > 0){
+        //     $curentPage = $page;
+        // }
+        //  // trang hiện tại
+        // $limit = 10; // số lượng sản phẩm có trong 1 trang
+        // $perPage = $curentPage - 1;
+        // $offset = intval($perPage * $limit);
+        // $count = $this->user->countAllUsers();
+        // $numberPage = ceil($count / $limit);
+        $users = $this->user->getAllUser();
         return view('admin.user.list',compact([
             'title',
             'users',
-            'numberPage'
         ]));
     }
     public function create(){

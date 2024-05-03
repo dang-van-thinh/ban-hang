@@ -30,8 +30,8 @@ class Bill extends Model
     public function addBill($data){
         return Bill::create($data);
     }
-    public function allBill($offset,$limit){
-        return Bill::offset($offset)->limit($limit)->orderBy('id','desc')->get();
+    public function allBill(){
+        return Bill::orderBy('id','desc')->paginate(10);
     }
     public function countBill(){
         return Bill::count();

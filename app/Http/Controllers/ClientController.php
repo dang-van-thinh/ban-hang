@@ -84,23 +84,17 @@ class ClientController extends Controller
         
         $key = $request->input('key');
         $title = "Tìm kiếm : $key ";
-        $curentPage = 1;
-        $limit = 12;
         $categoryChill = $this->category;
         $category = $this->category->getCategoryParent();
         $product = $this->productReponsitory->getProductBySearch($key);
         $color = $this->color->getAllColor();
         $size = $this->size->getAllSize();
-        // dd($product->pluck('id')->toArray());
-        // die;
-        $numberPage = ceil(count($product)/$limit);
 
         $priceMax = $this->productReponsitory->getPriceMax(null,$product->pluck('id')->toArray());
         $priceMin = $this->productReponsitory->getPriceMin(null,$product->pluck('id')->toArray());
 // dd($priceMax);
 // die;
         $products = [
-            'products'=>$product,
             'orderBy'=>null,
             'category'=>0,
             'priceMax'=>$priceMax,
@@ -124,18 +118,11 @@ class ClientController extends Controller
     public function view()
     {
         $title = 'Sản phẩm có nhiều lượt xem nhất';
-        $curentPage = 1;
-        $limit = 12;
-        $countProduct = $this->productReponsitory->countProduct();
-        $numberPage = ceil($countProduct / $limit);
-        $product = $this->productReponsitory->getAllProduct($curentPage, $limit, null, 0);
-        // dd($products);
-        // die;
+        $product = $this->productReponsitory->getAllProduct( null, 0);
         $priceMax = $this->productReponsitory->getPriceMax();
         $priceMin = $this->productReponsitory->getPriceMin();
 
         $products = [
-            'products' => $product,
             'orderBy' => 'views',
             'category' => 0,
             'priceMax'=>$priceMax,
@@ -151,7 +138,7 @@ class ClientController extends Controller
         return view('client.page.category', compact(
             'title',
             'products',
-            'numberPage',
+            'product',
             'color',
             'size',
             'category',
@@ -161,39 +148,29 @@ class ClientController extends Controller
     }
     public function category($id_category = null)
     {
-        $limit = 12;
-        $currentPage = 1;
-        $offset = ($currentPage - 1) * $limit;
         if ($id_category) {
-            $product = $this->productReponsitory->getProductWithCategory($id_category, $offset, $limit);
+            $product = $this->productReponsitory->getProductWithCategory($id_category);
             $priceMax = $this->productReponsitory->getPriceMax($id_category);
             $priceMin = $this->productReponsitory->getPriceMin($id_category);
             $products = [
-                'products' => $product,
                 'category' => $id_category,
                 'orderBy' => null,
                 'priceMax' => $priceMax,
                 'priceMin' => $priceMin
             ];
-            $countProduct = $this->productReponsitory->countProduct($id_category);
         } else {
-            $product = $this->productReponsitory->getAllProduct($offset, $limit);
+            $product = $this->productReponsitory->getAllProduct();
             $priceMax = $this->productReponsitory->getPriceMax();
             $priceMin = $this->productReponsitory->getPriceMin();
 
 
             $products = [
-                'products' => $product,
                 'category' => 0,
                 'orderBy' => null,
                 'priceMax' => $priceMax,
                 'priceMin'=> $priceMin
             ];
-            // dd($product);
-            // die;
-            $countProduct = $this->productReponsitory->countProduct();
         }
-        $numberPage = ceil($countProduct / $limit);
         $title = 'Sản phẩm';
         $script = [
             'js/client/libs/category.js'
@@ -206,11 +183,11 @@ class ClientController extends Controller
         return view('client.page.category', compact([
             'title',
             'products',
+            'product',
             'color',
             'size',
             'category',
             'categoryChill',
-            'numberPage',
             'script'
         ]));
     }

@@ -1,24 +1,25 @@
 $(document).ready(function() {
-    const urlDetail = $('.item-page').data('urldetail')
-    const urlProductOffset = $('.item-page').data('url');
-    const baseUrl = $('.item-page').data('urlimage');
+    const urlDetail = $('#attFilter').data('urldetail')
+    const urlProductOffset = $('#attFilter').data('url');
+    const baseUrl = $('#attFilter').data('urlimage');
     const urlFilter = $('#btn_filter_product').data('urlfilter')
+    // format price 
     $('#rangePrice').change(() => {
         let rangePrice = $('#rangePrice').val();
         $('#maxPrice').text(rangePrice.replace(/\B(?=(\d{3})+(?!\d))/g, '.'))
     })
 
-    $('.item-page').click(function(e) {
-        e.preventDefault()
-        let _this = $(this);
-        let page = _this.data('page');
-        let limit = _this.data('limit');
-        let offsets = Number((page - 1) * limit);
-        let category = _this.data('category');
-        let orderBy = _this.data('orderby');
+    // $('.item-page').click(function(e) {
+    //     e.preventDefault()
+    //     let _this = $(this);
+    //     let page = _this.data('page');
+    //     let limit = _this.data('limit');
+    //     let offsets = Number((page - 1) * limit);
+    //     let category = _this.data('category');
+    //     let orderBy = _this.data('orderby');
        
-        itemForPage(offsets, limit, category, orderBy);
-    });
+    //     itemForPage(offsets, limit, category, orderBy);
+    // });
 
     
     $('#orderby').change(function() {
@@ -96,49 +97,49 @@ $(document).ready(function() {
             }
         });
     }
-    function itemForPage(offset, limit, category, orderBy) {
-        let data = {
-            offset: offset,
-            limit: limit,
-            category: category,
-            orderBy: orderBy
-        };
+    // function itemForPage(offset, limit, category, orderBy) {
+    //     let data = {
+    //         offset: offset,
+    //         limit: limit,
+    //         category: category,
+    //         orderBy: orderBy
+    //     };
        
-        $.ajax({
-            type: "POST",
-            url: urlProductOffset,
-            data: data,
-            dataType: "json",
-            success: function(response) {
-                console.log(response);
-                let html = '';
+    //     $.ajax({
+    //         type: "POST",
+    //         url: urlProductOffset,
+    //         data: data,
+    //         dataType: "json",
+    //         success: function(response) {
+    //             console.log(response);
+    //             let html = '';
                 
-                response.products.forEach(el => {
-                    let price = el.price.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-                    html += `
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-6 mt-3">
-                            <div class="product">
-                                <a href="${urlDetail+'/'+el.id}">
-                                    <div class="image_product ">
-                                        <img src="${baseUrl+el.img}" alt="" class="text-center">
-                                    </div>
-                                    <div class=" des_product ps-3">
-                                        <h5 class="fw-medium text-secondary">${el.name}</h5>
-                                        <p class="text-danger fw-bold">
-                                            ${price} <span>VNĐ</span></p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    `;
-                });
-                $('#show_product').html(html)
-            },
-            error: function(xhr,status,error) {
-                // console.log(xhr.responseText);
-                // console.log(status);
-                // console.log(error);
-            }
-        });
-    }
+    //             response.products.forEach(el => {
+    //                 let price = el.price.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    //                 html += `
+    //                 <div class="col-lg-3 col-md-6 col-sm-6 col-6 mt-3">
+    //                         <div class="product">
+    //                             <a href="${urlDetail+'/'+el.id}">
+    //                                 <div class="image_product ">
+    //                                     <img src="${baseUrl+el.img}" alt="" class="text-center">
+    //                                 </div>
+    //                                 <div class=" des_product ps-3">
+    //                                     <h5 class="fw-medium text-secondary">${el.name}</h5>
+    //                                     <p class="text-danger fw-bold">
+    //                                         ${price} <span>VNĐ</span></p>
+    //                                 </div>
+    //                             </a>
+    //                         </div>
+    //                     </div>
+    //                 `;
+    //             });
+    //             $('#show_product').html(html)
+    //         },
+    //         error: function(xhr,status,error) {
+    //             // console.log(xhr.responseText);
+    //             // console.log(status);
+    //             // console.log(error);
+    //         }
+    //     });
+    // }
 });

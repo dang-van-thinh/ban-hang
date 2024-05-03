@@ -13,19 +13,19 @@ class BillController extends Controller
         $this->bill = new Bill();
     }
     //
-    public function index($page=0){
+    public function index(){
         $title = 'Danh sách hóa đơn';
-        $curentPage = 1;
-        if($page > 0){
-            $curentPage = $page;
-        }
-         // trang hiện tại
-        $limit = 12; // số lượng sản phẩm có trong 1 trang
-        $perPage = $curentPage - 1;
-        $offset = intval($perPage * $limit);
-        $count = $this->bill->countBill();
-        $numberPage = ceil($count / $limit);
-        $bills = $this->bill->allBill($offset,$limit);
+        // $curentPage = 1;
+        // if($page > 0){
+        //     $curentPage = $page;
+        // }
+        //  // trang hiện tại
+        // $limit = 12; // số lượng sản phẩm có trong 1 trang
+        // $perPage = $curentPage - 1;
+        // $offset = intval($perPage * $limit);
+        // $count = $this->bill->countBill();
+        // $numberPage = ceil($count / $limit);
+        $bills = $this->bill->allBill();
         $script = [
             'js/admin/detailBill.js',
             'js/admin/listBill.js',
@@ -33,7 +33,6 @@ class BillController extends Controller
         return view('admin.bill.list',compact(
             'title',
             'bills',
-            'numberPage',
             'script'
         ));
     }
