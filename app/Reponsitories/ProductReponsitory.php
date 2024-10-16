@@ -15,7 +15,7 @@ class ProductReponsitory
   {
     $this->model = new Product();
   }
-  public function getAllProduct( $category = null, $orderBy = null)
+  public function getAllProduct($category = null, $orderBy = null)
   {
     $product = DB::table($this->table);
     if ($category) {
@@ -28,7 +28,7 @@ class ProductReponsitory
 
     return $product;
   }
-  
+
   public function countProduct($id_category = null)
   {
     $count = DB::table($this->table);
@@ -74,12 +74,12 @@ class ProductReponsitory
       ->where('id', '!=', $id)
       ->get();
   }
-  public function filterProduct($color=null, $size = null, $price = null, $orderby, $category=0,$key=null)
+  public function filterProduct($color = null, $size = null, $price = null, $orderby, $category = 0, $key = null)
   {
     $product = Product::join('quanity as q', 'q.product_id', '=', 'product.id')
       ->join('color', 'color.id', '=', 'q.id_color')
       ->join('size', 'size.id', '=', 'q.id_size');
-    if ($category>0) {
+    if ($category > 0) {
       $product = $product->where('product.category_id', '=', $category);
     }
     if ($color) {
@@ -89,10 +89,10 @@ class ProductReponsitory
       $product = $product->whereIn('q.id_size', $size);
     }
     if ($price) {
-      $product = $product->whereBetween('product.price',[0,$price]);
+      $product = $product->whereBetween('product.price', [0, $price]);
     }
     if ($key) {
-      $product = $product->where('product.name','like','%'.$key.'%');
+      $product = $product->where('product.name', 'like', '%' . $key . '%');
     }
     $product = $product->groupBy('product.id', 'product.name', 'product.img', 'product.price')
       ->select('product.id', 'product.name', 'product.img', 'product.price');
@@ -106,7 +106,7 @@ class ProductReponsitory
       $product = $product->orderBy('name', 'desc');
     }
     $product = $product->get();
-   
+
     return $product;
   }
   public function updateProduct($id, $data)
@@ -124,36 +124,37 @@ class ProductReponsitory
   {
     return Product::limit($limit)->orderBy('views', 'desc')->get();
   }
-  public function getPriceMax($id_category=null,$id_product=null){
+  public function getPriceMax($id_category = null, $id_product = null)
+  {
     $query = DB::table('product');
-    if($id_category!=null){
-      $query = $query->where('category_id','=',$id_category);
+    if ($id_category != null) {
+      $query = $query->where('category_id', '=', $id_category);
     }
-    if($id_product != null){
-      $query = $query->whereIn('id',$id_product);
+    if ($id_product != null) {
+      $query = $query->whereIn('id', $id_product);
     }
-   return $query->max('price');
-
+    return $query->max('price');
   }
-  public function getPriceMin($id_category=null,$id_product=null){
+  public function getPriceMin($id_category = null, $id_product = null)
+  {
     $query = DB::table('product');
-    if($id_category!=null){
-      $query = $query->where('category_id','=',$id_category);
+    if ($id_category != null) {
+      $query = $query->where('category_id', '=', $id_category);
     }
-    if($id_product != null){
-      $query = $query->whereIn('id',$id_product);
+    if ($id_product != null) {
+      $query = $query->whereIn('id', $id_product);
     }
-   return $query->min('price');
-
+    return $query->min('price');
   }
   public function getProductWithCategory($id_category)
   {
     return Product::where('category_id', '=', $id_category)
-    ->paginate(12);
+      ->paginate(12);
   }
-  public function getProductBySearch($key){
-    return Product::where('product.name','like','%'.$key.'%')
-    ->paginate(12);
+  public function getProductBySearch($key)
+  {
+    return Product::where('product.name', 'like', '%' . $key . '%')
+      ->paginate(12);
   }
   public function upToViewForProduct($id)
   {

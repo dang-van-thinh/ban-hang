@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
     var arrCart = [];
     var itemLocal = localStorage.getItem('product');
     const idProduct = $('#data-product').data('id');
@@ -8,7 +8,7 @@ $(document).ready(function() {
         arrCart = JSON.parse(itemLocal);
     }
     $('#numberCart').text(arrCart.length);
-    
+
     // add product to cart
     $('#btn_add_cart').click(() => {
         let idProduct = $('#id_product').val();
@@ -56,11 +56,11 @@ $(document).ready(function() {
     })
 
     // active attribute
-    $('.size_item').click(function(e) {
+    $('.size_item').click(function (e) {
         $(this).addClass('item_active')
         $('.size_item').not(this).removeClass('item_active')
     });
-    $('.color_item').click(function(e) {
+    $('.color_item').click(function (e) {
         $(this).addClass('item_active')
         $('.color_item').not(this).removeClass('item_active')
     });
@@ -94,12 +94,12 @@ $(document).ready(function() {
 
     // change to quanity
     // input fail fomart
-    $('#numberOrder').on('change',function () {
+    $('#numberOrder').on('change', function () {
         let _this = $(this);
         let quanity = $('#quanityProduct').text()
-        if(_this.val() > Number(quanity) ){
+        if (_this.val() > Number(quanity)) {
             _this.val(Number(quanity));
-        }else if(_this.val() < 1){
+        } else if (_this.val() < 1) {
             _this.val(1)
         }
     })
@@ -134,8 +134,8 @@ $(document).ready(function() {
                 'idColor': color,
                 'idSize': size
             },
-            success: function(response) {
-                if ( response.quanity.quanity_pr == 0 || response.quanity == null) {
+            success: function (response) {
+                if (response.quanity.quanity_pr == 0 || response.quanity == null) {
                     // console.log('đúng');
                     $('#quanityProduct').text('Không còn hàng');
                     $('#numberOrder').attr('max', 0).val(0)
@@ -152,11 +152,11 @@ $(document).ready(function() {
                     $('#btn_add_cart').css('cursor', 'pointer');
                     $('#btn_add_cart').prop('disabled', false);
                 }
-                
+
 
                 // console.log(response.quanity.quanity_pr);
             },
-            error: function(error) {
+            error: function (error) {
                 console.log(error)
             }
         });
@@ -183,7 +183,7 @@ $(document).ready(function() {
                 item: 4,
                 loop: false
             },
-           
+
 
         }
     })

@@ -24,11 +24,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 // route product admin
 Route::prefix('admin')->name('admin.')->middleware('authen')->group(function () {
     Route::get('/', [AnalyticsController::class, 'dashboard'])->name('dashboard')->middleware('role.admin');
@@ -76,8 +71,9 @@ Route::prefix('admin')->name('admin.')->middleware('authen')->group(function () 
         Route::get('list', [BillController::class, 'index'])->name('index');
     });
     // comment
-    Route::prefix('comments')->name('comments.')->group(function(){
-        Route::get('comment/list',[CommentsController::class,'index'])->name('index');
+    Route::prefix('comments')->name('comments.')->group(function () {
+        Route::get('comment/list', [CommentsController::class, 'index'])->name('index');
+        Route::get('/create' , [CommentsController::class, 'store'])->name('store');
     });
 });
 

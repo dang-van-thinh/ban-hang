@@ -9,7 +9,9 @@ use App\Models\Product;
 use App\Models\Quanity;
 use App\Models\Wards;
 use App\Reponsitories\ProductReponsitory;
+use Illuminate\Http\Client\Response as ClientResponse;
 use Illuminate\Http\Request;
+use Spatie\FlareClient\Http\Response;
 
 class AjaxController extends Controller
 {
@@ -106,7 +108,7 @@ protected $comments;
         $comment = [
             'id_user'=>$request->input('user'),
             'id_product'=>$request->input('product'),
-            'description'=>$request->input('description')
+            'content'=>$request->input('content')
         ];
 
         $state = $this->comments->store($comment);
@@ -118,7 +120,9 @@ protected $comments;
             ];
             return response()->json($data);
         }
-        
+        return response()->json([
+            'status'=> 400
+        ],400);
     }
     public function indexComment(Request $request){
         $comments = $this->comments->index($request->input('product'));

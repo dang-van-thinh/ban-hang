@@ -73,10 +73,10 @@ class PayController extends Controller
         // dd($result);
         // die;
         $jsonResult = json_decode($result, true);  // decode json
-// dd($jsonResult['payUrl']);
-// die;
+        dd($jsonResult['payUrl']);
+        die;
         //Just a example, please check more in there
-      return redirect()->to($jsonResult['payUrl']);
+        return redirect()->to($jsonResult['payUrl']);
         // header('Location: ' . $jsonResult['payUrl']);
     }
 }

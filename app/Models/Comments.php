@@ -9,29 +9,37 @@ use Illuminate\Support\Facades\DB;
 class Comments extends Model
 {
     use HasFactory;
-    protected $table = 'comments';
-    protected $fillable=[
+    protected $table = 'comment';
+    protected $fillable = [
         'id_user',
         'id_product',
-        'description'
+        'content'
     ];
-    public function store($comment){
+    public function store($comment)
+    {
         return Comments::create($comment);
     }
-    public function index($idProduct){
-        return Comments::join('users','users.id','=','comments.id_user')
-        ->where('id_product','=',$idProduct)
-        ->select('comments.description','comments.created_at',
-        'users.name')
-        ->get()
+    public function index($idProduct)
+    {
+        return Comments::join('users', 'users.id', '=', 'comment.id_user')
+            ->where('id_product', '=', $idProduct)
+            ->select(
+                'comment.content',
+                'users.name'
+            )
+            ->get()
         ;
     }
-    public function getAll(){
-        return Comments::join('users','users.id','=','comments.id_user')
-        ->join('product','product.id','=','comments.id_product')
-        ->select('comments.description','comments.created_at','comments.id',
-        'users.name as userName',
-        'product.name as productName')
-        ->paginate(10);
+    public function getAll()
+    {
+        return Comments::join('users', 'users.id', '=', 'comment.id_user')
+            ->join('product', 'product.id', '=', 'comment.id_product')
+            ->select(
+                'comment.content',
+                'comment.id',
+                'users.name as userName',
+                'product.name as productName'
+            )
+            ->paginate(10);
     }
 }
